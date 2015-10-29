@@ -1,0 +1,24 @@
+# Ignore everything ...
+*.*
+*
+
+#... but the next files:
+!.gitignore
+!desync9X.txt
+!desyncFilter.txt
+
+# Modelsim
+!*.vhd
+!*.tcl
+!*.mpf
+
+# Quartus
+!*.qpf
+!*.bdf
+
+# C++
+!*.C
+!*.cpp
+!*.h
+!make*
+!Make*
