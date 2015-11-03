@@ -12,62 +12,50 @@
 using namespace std;
 
 //typedef
-typedef bitset<128> packet;
+typedef bitset<128> frame;
 
 //files
-fstream * un_scrambled_datafile;
-fstream * new_scrambled_datafile;
-fstream * old_scrambled_datafile;
-TFile   * output_file;
-
-//graphs
-TGraph * un_scrambled_graph;
-TGraph * new_scrambled_graph;
-TGraph * old_scrambled_graph;
+fstream ** input_file;
+TFile   *  output_file;
 
 //hists
-TH1F * pre_scramble_hist;
-TH1F * new_scramble_hist;
-TH1F * old_scramble_hist;
+TH1F * histogram;
 
 //funcitons
-int count_data_points();
-void graph_init(int);
-void draw_graphs(int);
-int transition_count(packet);
-packet str_to_packet(string);
-void save_graphs();
+int    count_data_points ();
+void   graph_init        (int);
+void   draw_graphs       (int);
+int    transition_count  (frame);
+frame  str_to_frame      (string);
+void   save_graphs       ();
             
 int main(int argc, const char ** argv)
 {
-    if (argc != 5)
+  if (argc = 1)
     {
-        cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <old_scrambled> <output_file>" << endl;
-        return 1;
+      cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <additive_scrambled> <output_file>" << endl;
+      return 1;
     }
-    else
+  else
     {
-        //open files
-        un_scrambled_datafile  = new fstream(argv[1],fstream::in);
-        new_scrambled_datafile = new fstream(argv[2],fstream::in);
-        old_scrambled_datafile = new fstream(argv[3],fstream::in);
-        output_file            = new TFile(argv[4], "RECREATE");
-    }
-    
-    int data_points(count_data_points());
-    cout << data_points << " data_points" << endl;
-    
-    //reopen un_scrambled_datafile as its used for counting
-    un_scrambled_datafile -> close();   
-    un_scrambled_datafile -> open(argv[1]);
-    
-    graph_init(data_points);
-    
-    draw_graphs(data_points);
+      input_file = new fstream[argc-1];
 
-    save_graphs();
+      for (int i(1); i <argc-1; i++)
+	input_file[i-1] = new fstream(argv[i],fstream::in);
+
+      output_file = new TFile(argv[argv.size()-1], "RECREATE");
+    }
     
-    return 0;
+  int data_points(count_data_points());
+  cout << data_points << " data_points" << endl;
+    
+  graph_init(data_points);
+    
+  draw_graphs(data_points);
+
+  save_graphs();
+    
+  return 0;
 }
 
 #endif
