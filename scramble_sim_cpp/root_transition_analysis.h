@@ -31,7 +31,7 @@ void   save_graphs       ();
             
 int main(int argc, const char ** argv)
 {
-  if (argc = 1)
+  if (argc == 1)
     {
       cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <additive_scrambled> <output_file>" << endl;
       return 1;
