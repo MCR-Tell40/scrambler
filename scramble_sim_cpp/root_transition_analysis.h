@@ -8,6 +8,7 @@
 #include <TH1.h>
 #include <string>
 #include <bitset>
+#include <vector>
 
 using namespace std;
 
@@ -15,11 +16,11 @@ using namespace std;
 typedef bitset<128> frame;
 
 //files
-fstream ** input_file;
+vector<fstream*> input_file;
 TFile   *  output_file;
 
 //hists
-TH1F * histogram;
+vector<TH1F*> histogram;
 
 //funcitons
 int    count_data_points ();
@@ -38,12 +39,10 @@ int main(int argc, const char ** argv)
     }
   else
     {
-      input_file = new fstream[argc-1];
-
       for (int i(1); i <argc-1; i++)
-	input_file[i-1] = new fstream(argv[i],fstream::in);
+	input_file.push_back(new fstream(argv[i],fstream::in));
 
-      output_file = new TFile(argv[argv.size()-1], "RECREATE");
+      output_file = new TFile(argv[argc-1], "RECREATE");
     }
     
   int data_points(count_data_points());
