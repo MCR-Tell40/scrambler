@@ -40,7 +40,7 @@ void draw_graphs()
 	histogram[j] -> Fill(transition_count(str_to_frame(input)));
 
 	count ++;
-	if (!count % 10000) cout << histogram[j].getName() << count << endl;
+	if (!count % 10000) cout << histogram[j].getTitle() << count << endl;
       }
 }
 
