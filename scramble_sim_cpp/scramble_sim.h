@@ -77,7 +77,7 @@ int main(int argc, const char * argv[])
 
       // ---- debugging ----
       frame_count++;
-      if (frame_count % 10000 == 0) cout << frame_count << " | ";
+      if (frame_count % 10000 == 0) cout << frame_count << endl;
 
       //attach header and parity info from input to output frames
       for (int i(1); i < data_frame.size(); i++)
