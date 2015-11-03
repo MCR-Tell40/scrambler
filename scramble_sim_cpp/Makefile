@@ -11,10 +11,10 @@ root_transition_analysis: root_transition_analysis.cpp root_transition_analysis.
 	g++ -o $@ root_transition_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
 root_longest_chain: root_longest_chain.cpp root_longest_chain.h
-	g++ -o $@ root_longest_chain.cpp $(ROOTFLAGS) $(ROOTLIBS)
+	g++ -o $@ root_longest_chain.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
 root_balance_analysis: root_balance_analysis.cpp root_balance_analysis.h
-	g++ -o $@ root_balance_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS)
+	g++ -o $@ root_balance_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) %(FLAGS)
 
 run_short: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
 	./scramble_sim desyncFilter.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt
