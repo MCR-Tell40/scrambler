@@ -21,6 +21,7 @@ TFile   *  output_file;
 //hists
 TH1F * histogram;
 
+//nick is awesome
 //funcitons
 int    count_data_points ();
 void   graph_init        (int);
@@ -45,13 +46,10 @@ int main(int argc, const char ** argv)
 
       output_file = new TFile(argv[argv.size()-1], "RECREATE");
     }
+  
+  graph_init();
     
-  int data_points(count_data_points());
-  cout << data_points << " data_points" << endl;
-    
-  graph_init(data_points);
-    
-  draw_graphs(data_points);
+  draw_graphs();
 
   save_graphs();
     
