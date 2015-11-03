@@ -23,9 +23,8 @@ TFile   *  output_file;
 vector<TH1F*> histogram;
 
 //funcitons
-int    count_data_points ();
-void   graph_init        (int);
-void   draw_graphs       (int);
+void   graph_init        ();
+void   draw_graphs       ();
 int    transition_count  (frame);
 frame  str_to_frame      (string);
 void   save_graphs       ();
@@ -45,12 +44,9 @@ int main(int argc, const char ** argv)
       output_file = new TFile(argv[argc-1], "RECREATE");
     }
     
-  int data_points(count_data_points());
-  cout << data_points << " data_points" << endl;
+  graph_init();
     
-  graph_init(data_points);
-    
-  draw_graphs(data_points);
+  draw_graphs();
 
   save_graphs();
     

@@ -1,6 +1,6 @@
 #include "root_transition_analysis.h"
 
-void graph_init(int data_points)
+void graph_init()
 {
   if (input_file.size()>=1)
     histogram.push_back( new TH1F(
@@ -69,6 +69,6 @@ void save_graphs()
 {
   output_file -> cd();
   for (auto& hist: histogram)
-    hist->write();
+    hist->Write();
   output_file->Close();
 }
