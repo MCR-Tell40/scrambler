@@ -1,6 +1,8 @@
 #ifndef __root_graph_transitions_h__
 #define __root_graph_transitions_h__
 
+#define __TRANSITION_DEBUG__
+
 #include <iostream>
 #include <fstream>
 #include <TFile.h>

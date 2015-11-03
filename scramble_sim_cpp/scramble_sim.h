@@ -8,7 +8,7 @@
 #include <assert.h>
 #include <vector>
 
-#define __debug_mode__
+//#define __debug_mode__
 
 using namespace std;
 
@@ -53,8 +53,9 @@ int main(int argc, const char * argv[])
     
   //File
   vector<fstream*> file;
-  for (int i(1); i < argc; i++)
-    file.push_back(new fstream(argv[i]));
+  file.push_back(new fstream(argv[1]));
+  for (int i(2); i < argc; i++)
+    file.push_back(new fstream(argv[i], fstream::out));
 
   int frame_count(0);
   while(!file[0]->eof())
@@ -67,7 +68,6 @@ int main(int argc, const char * argv[])
       string buffer; *file[0] >> buffer;
       data_frame[0] = str_to_frame(buffer);
       if(data_frame[0] == 0) break;     
-
 
       //SPP Handeling
       vector<spp*> data_spp;
@@ -113,7 +113,7 @@ int main(int argc, const char * argv[])
 
       //write to out files
       for (int i(1); i<file.size(); i++)
-	*file[i] << data_frame[i];
+	*file[i] << data_frame[i] << endl;
     } //while !eof
   
   cout << endl << "scramble_sim: " << frame_count << " frame" << endl;

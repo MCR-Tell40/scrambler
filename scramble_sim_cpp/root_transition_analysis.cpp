@@ -32,6 +32,9 @@ void draw_graphs()
 {
   for (int j(0); j<input_file.size(); j++)
     {
+#ifdef __TRANSITION_DEBUG__
+      cout << "draw_graphs()" << endl;
+#endif
       int count(0);
       while (!input_file[j]->eof())
 	{
@@ -40,7 +43,7 @@ void draw_graphs()
 	  histogram[j] -> Fill(transition_count(str_to_frame(input)));
 
 	  count ++;
-	  if (!count % 10000) cout << histogram[j]->GetName() << count << endl;
+	  if (count%10000 == 0) cout << histogram[j]->GetName() << count << endl;
 	}
     }
 }frame str_to_frame(string signal)
