@@ -2,6 +2,7 @@ ROOTFLAGS = $(shell root-config --cflags)
 ROOTLIBS  = $(shell root-config --libs)
 ROOTDIR = root_files
 ROOTMAC = root_macros
+FLAGS = -std=c++11
 SCRAMBLE = scramble_outputs
 
 all: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
@@ -10,7 +11,7 @@ scramble_sim: scramble_sim.cpp scramble_sim.h
 	g++ -o $@ scramble_sim.cpp
 
 root_transition_analysis: root_transition_analysis.cpp root_transition_analysis.h
-	g++ -o $@ root_transition_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS)
+	g++ -o $@ root_transition_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
 root_longest_chain: root_longest_chain.cpp root_longest_chain.h
 	g++ -o $@ root_longest_chain.cpp $(ROOTFLAGS) $(ROOTLIBS)
