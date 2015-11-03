@@ -7,9 +7,9 @@ void fillVector(fstream* file, vector<int>& balance)
   while (!file->eof())
   //for (int j(0); j < 20; j++)
     {
-      string temp;
-      *file >> temp;
-      packet line = str_to_packet(temp);
+      string input;
+      *file >> input;
+      frame line = str_to_frame(input);
 
       for (int i(0); i<120; i++)
 	{
@@ -17,11 +17,11 @@ void fillVector(fstream* file, vector<int>& balance)
 	  else count--; 
 
 	} 
-	balance.push_back(count);	
+      balance.push_back(count);	
     }
 }
 
-void draw_graphs(TGraph& graph, vector<int> datay)
+void draw_graph(TGraph* graph, vector<int> datay, string name)
 {
   int* y = &datay[0];
 
@@ -30,34 +30,22 @@ void draw_graphs(TGraph& graph, vector<int> datay)
   for (int i(0); i < datay.size(); i++)
     x[i] = i;
   
-  //TVectorF _datax(datax.size(),datax[0]);
-  //TVectorF _datay(datay.size(),datay[0]);
-  //TVectorT<long>* _datax;
-  // for (int i(0); i < datax.size(); i++)
-  //_datax[i] = datax[i];
+  delete graph;
+  graph = new TGraph(datay.size(),x,y);  
+  
+  output_file->cd();
+  graph->Write(name.c_str());
 
-  //TVectorD* _datay = new TVectorD((Int_t)datay.size());
-  //for (int i(0); i < datay.size(); i++)
-  //_datay[i] = datay[i];
-  graph = TGraph(datay.size(),x,y);  
+  delete x;
 }
 
-packet str_to_packet(string signal)
+frame str_to_frame(string signal)
 {
-  packet _packet = 0;
+  frame _frame = 0;
     
   for (int index(1); index <= 128; index++)
     if (signal[128-index] == '1')
-      _packet[index-1] = 1;
+      _frame[index-1] = 1;
     
-  return _packet;
-}
-
-void save_graphs()
-{
-  output_file -> cd();
-  un_scrambled_graph.Write("Un_Scramble");
-  new_scrambled_graph.Write("New_Scramble");
-  old_scrambled_graph.Write("Old_Scramble");
-  output_file->Close();
+  return _frame;
 }
