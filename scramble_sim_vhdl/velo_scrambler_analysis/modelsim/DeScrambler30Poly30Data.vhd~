@@ -1,0 +1,78 @@
+-- Translatiing the VELO scrambler into VHDL from Verilog
+-- Author Ben Jeffrey
+-- Date Created 29/10/15
+-- Algorithm by Sandeep from NIKHEF
+
+
+-- IEEE VHDL standard library:
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- need to create entity
+-- need to create architecture
+-- need to create process
+
+entity VeloPixScrambler is
+  port(
+    clk: in std_logic;
+	rst: in std_logic;
+    frameIn: in std_logic_vector(29 downto 0);
+    scramble_out: out std_logic_vector(29 downto 0)
+    );
+end VeloPixScrambler;
+
+architecture a of VeloPixScrambler is
+
+
+  signal state, nextState, dataOutEval : std_logic_vector(29 downto 0);
+  constant reset_pattern:  std_logic_vector(29 downto 0 ) := "10" & x"AAAAAAA";
+-------------- ALGORITHM ---------------------
+begin
+  dataOutEval(0) <= frameIn(0) XOR state(0) XOR state(1) XOR state(15) XOR state(16);
+  dataOutEval(1) <= frameIn(1) XOR state(1) XOR state(2) XOR state(16) XOR state(17);
+  dataOutEval(2) <= frameIn(2) XOR state(2) XOR state(3) XOR state(17) XOR state(18);
+  dataOutEval(3) <= frameIn(3) XOR state(3) XOR state(4) XOR state(18) XOR state(19);
+  dataOutEval(4) <= frameIn(4) XOR state(4) XOR state(5) XOR state(19) XOR state(20);
+  dataOutEval(5) <= frameIn(5) XOR state(5) XOR state(6) XOR state(20) XOR state(21);
+  dataOutEval(6) <= frameIn(6) XOR state(6) XOR state(7) XOR state(21) XOR state(22);
+  dataOutEval(7) <= frameIn(7) XOR state(7) XOR state(8) XOR state(22) XOR state(23);
+  dataOutEval(8) <= frameIn(8) XOR state(8) XOR state(9) XOR state(23) XOR state(24);
+  dataOutEval(9) <= frameIn(9) XOR state(9) XOR state(10) XOR state(24) XOR state(25);
+  dataOutEval(10) <= frameIn(10) XOR state(10) XOR state(11) XOR state(25) XOR state(26);
+  dataOutEval(11) <= frameIn(11) XOR state(11) XOR state(12) XOR state(26) XOR state(27);
+  dataOutEval(12) <= frameIn(12) XOR state(12) XOR state(13) XOR state(27) XOR state(28);
+  dataOutEval(13) <= frameIn(13) XOR state(13) XOR state(14) XOR state(28) XOR state(29);
+  dataOutEval(14) <= frameIn(14) XOR state(14) XOR state(15) XOR state(29) XOR frameIn(0);
+  dataOutEval(15) <= frameIn(15) XOR state(15) XOR state(16) XOR frameIn(0) XOR frameIn(1);
+  dataOutEval(16) <= frameIn(16) XOR state(16) XOR state(17) XOR frameIn(1) XOR frameIn(2);
+  dataOutEval(17) <= frameIn(17) XOR state(17) XOR state(18) XOR frameIn(2) XOR frameIn(3);
+  dataOutEval(18) <= frameIn(18) XOR state(18) XOR state(19) XOR frameIn(3) XOR frameIn(4);
+  dataOutEval(19) <= frameIn(19) XOR state(19) XOR state(20) XOR frameIn(4) XOR frameIn(5);
+  dataOutEval(20) <= frameIn(20) XOR state(20) XOR state(21) XOR frameIn(5) XOR frameIn(6);
+  dataOutEval(21) <= frameIn(21) XOR state(21) XOR state(22) XOR frameIn(6) XOR frameIn(7);
+  dataOutEval(22) <= frameIn(22) XOR state(22) XOR state(23) XOR frameIn(7) XOR frameIn(8);
+  dataOutEval(23) <= frameIn(23) XOR state(23) XOR state(24) XOR frameIn(8) XOR frameIn(9);
+  dataOutEval(24) <= frameIn(24) XOR state(24) XOR state(25) XOR frameIn(9) XOR frameIn(10);
+  dataOutEval(25) <= frameIn(25) XOR state(25) XOR state(26) XOR frameIn(10) XOR frameIn(11);
+  dataOutEval(26) <= frameIn(26) XOR state(26) XOR state(27) XOR frameIn(11) XOR frameIn(12);
+  dataOutEval(27) <= frameIn(27) XOR state(27) XOR state(28) XOR frameIn(12) XOR frameIn(13);
+  dataOutEval(28) <= frameIn(28) XOR state(28) XOR state(29) XOR frameIn(13) XOR frameIn(14);
+  dataOutEval(29) <= frameIn(29) XOR state(29) XOR frameIn(0) XOR frameIn(14) xor frameIn(15);
+  nextState <= frameIn;
+
+--------------- END OF ALGORITHM ---------------------
+
+  process(clk,rst)
+	begin
+    if rst = '1' then
+      state <= reset_pattern;
+      scramble_out <= (others => '0');
+    else
+      if rising_edge(clk) then
+        scramble_out <= dataOutEval;
+        state <= nextState;
+      end if;
+    end if;
+  end process;
+end a;

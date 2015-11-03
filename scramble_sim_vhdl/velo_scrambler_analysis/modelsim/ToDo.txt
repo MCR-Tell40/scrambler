@@ -1,0 +1,6 @@
+-- all steps happening before actual data is arriving
+	-- implement a valid signal in all steps
+x		-- start in reader
+		-- make signals from reader - scrambler, screambler - descrambler, descrambler - write
+x		-- add valid to writer 
+x		-- add valid to scrambling algorithm
