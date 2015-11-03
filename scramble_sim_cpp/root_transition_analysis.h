@@ -22,6 +22,7 @@ TFile   *  output_file;
 //hists
 vector<TH1F*> histogram;
 
+//nick is awesome
 //funcitons
 void   graph_init        ();
 void   draw_graphs       ();
@@ -43,9 +44,9 @@ int main(int argc, const char ** argv)
 
       output_file = new TFile(argv[argc-1], "RECREATE");
     }
-    
+  
   graph_init();
-    
+  
   draw_graphs();
 
   save_graphs();
