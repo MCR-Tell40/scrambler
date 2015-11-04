@@ -25,7 +25,7 @@ run_short: scramble_sim root_transition_analysis root_longest_chain root_balance
 run_full: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
 	./scramble_sim             desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt
 	./root_transition_analysis desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt transition_analysis_full.root
-	./root_longest_chain       desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt longest_chain_full.root
+	./root_longest_chain       desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt 1_longest_chain_full.root
 	./root_balance_analysis    desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt balance_analysis_full.root
 
 clean:
