@@ -38,6 +38,8 @@ void draw_balance_graphs()
   leg->AddEntry(Karol_graph,"Markov Scrambler","l");
   leg->AddEntry(additive_graph,"Additive Scrambler","l");
   leg->Draw();
+
+  c1->Pad()->SetGridy();
   c1->Update();
-  c1->SaveAs("Evolution_in_the_Balance_of_1s_and_0s.pdf");
+  c1->SaveAs("graphs/Evolution_in_the_Balance_of_1s_and_0s.pdf");
 }
