@@ -34,8 +34,8 @@ void draw_balance_graphs()
 
   TLegend* leg = new TLegend(0.7,0.5,0.9,0.6);
   leg->AddEntry(desync9X_graph,"Dysync 9X","l");
-  leg->AddEntry(Karol_graph,"Markov Scrambler","l");
   leg->AddEntry(velopix_graph,"VeloPix Scrambler","l");
+  leg->AddEntry(Karol_graph,"Markov Scrambler","l");
   leg->AddEntry(additive_graph,"Additive Scrambler","l");
   leg->Draw();
   c1->Update();
