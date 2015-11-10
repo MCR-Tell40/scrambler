@@ -1,0 +1,149 @@
+void draw_chain_graph_full()
+{
+  TFile *f = new TFile("longest_chain_full.root");
+
+  TH1F *un_scramble_hist = (TH1F*)f->Get("desync9X_scrambler_hist");
+  TH1F *Karol_scramble_hist = (TH1F*)f->Get("Karol_scrambler_hist");
+  TH1F *additive_scramble_hist = (TH1F*)f->Get("additive_scrambler_hist");
+  TH1F *Velopix_scramble_hist = (TH1F*)f->Get("Velopix_scrambler_hist");
+
+  // gStyle->SetOptStat(0000000000);
+  // gStyle->SetOptFit(11);
+  // gStyle->SetStatW(0.12);                
+  // gStyle->SetStatH(0.12);  
+  
+  TCanvas *c1 = new TCanvas("c1","Chain Length",900,800);
+
+  c1->Divide(1,2,0.01,0.01);
+
+  c1->cd(1);
+  
+  // Pre Scramble
+
+  un_scramble_hist->Draw("");
+  un_scramble_hist->SetLineColor(1);
+  un_scramble_hist->SetLineStyle(1);
+  un_scramble_hist->SetLineWidth(3);
+  //un_scramble_hist->Fit("gaus");
+  //un_scramble_hist->GetFunction("gaus")->SetLineColor(1); 
+  un_scramble_hist->SetStats(0);
+  un_scramble_hist->GetYaxis()->SetLabelSize(0.06);
+  un_scramble_hist->GetXaxis()->SetLabelSize(0.06);
+  un_scramble_hist->GetYaxis()->SetTitleSize(0.052);
+  un_scramble_hist->GetXaxis()->SetTitleSize(0.052);
+
+  un_scramble_hist->SetTitle(0);
+  un_scramble_hist->GetXaxis()->SetTitle("Chain Length");
+  un_scramble_hist->GetYaxis()->SetTitle("Entries");
+
+  un_scramble_hist->GetXaxis()->SetRangeUser(1,35);
+
+  // New Scramble
+  Karol_scramble_hist->Draw("sames");
+  Karol_scramble_hist->SetTitle(0);
+  Karol_scramble_hist->SetLineColor(2);
+  Karol_scramble_hist->SetLineStyle(1);
+  Karol_scramble_hist->SetLineWidth(3);
+  //Karol_scramble_hist->Fit("gaus"); 
+  //Karol_scramble_hist->GetFunction("gaus")->SetLineColor(2);
+ 
+  //Karol_scramble_hist->GetYaxis()->SetRangeUser(5000);
+  
+
+  Karol_scramble_hist->SetStats(0);
+
+
+
+
+   
+  // Additive Scramble
+  additive_scramble_hist->Draw("sames");
+  additive_scramble_hist->SetLineColor(4);
+  additive_scramble_hist->SetLineStyle(7);
+  additive_scramble_hist->SetLineWidth(3);
+  //additive_scramble_hist->Fit("gaus"); 
+  //additive_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
+  additive_scramble_hist->SetStats(0);
+
+
+  // Velopix Scramble
+  Velopix_scramble_hist->Draw("sames");
+  Velopix_scramble_hist->SetLineColor(8);
+  Velopix_scramble_hist->SetLineStyle(6);
+  Velopix_scramble_hist->SetLineWidth(3);
+  //Velopix_scramble_hist->Fit("gaus"); 
+  //Velopix_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
+  Velopix_scramble_hist->SetStats(0);
+
+  
+  // Legend
+  leg_top = new TLegend(0.65,0.6,0.9,0.9);
+  leg_top->AddEntry(un_scramble_hist,"Pre Scrambler","l");
+  leg_top->AddEntry(Karol_scramble_hist,"Karol Scrambler","l");
+  leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
+  leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
+  leg_top->Draw();
+
+
+  c1->Pad()->SetGridy();
+
+  //----------------------Bottom graph-------------//
+  c1->cd(2);
+  
+
+
+
+  // Pre Scramble
+  un_scramble_hist->Draw("");
+  un_scramble_hist->SetLineColor(1);
+  un_scramble_hist->SetLineStyle(1);
+  //un_scramble_hist->Fit("gaus");
+  //un_scramble_hist->GetFunction("gaus")->SetLineColor(1);
+  un_scramble_hist->SetTitle(0);
+  un_scramble_hist->GetXaxis()->SetTitle("Chain Length");
+  un_scramble_hist->GetYaxis()->SetTitle("Entries");
+ 
+  un_scramble_hist->SetStats(0);
+   
+
+  // New Scramble
+  Karol_scramble_hist->Draw("sames");
+  Karol_scramble_hist->SetLineColor(2);
+  Karol_scramble_hist->SetLineStyle(1);
+  //Karol_scramble_hist->Fit("gaus"); 
+  //Karol_scramble_hist->GetFunction("gaus")->SetLineColor(2);
+
+  //Karol_scramble_hist->GetYaxis()->SetLabelSize(0.02);
+  Karol_scramble_hist->SetStats(0);
+  
+  
+  // Additive Scramble
+  additive_scramble_hist->Draw("sames");
+  additive_scramble_hist->SetLineColor(4);
+  additive_scramble_hist->SetLineStyle(7);
+  //additive_scramble_hist->Fit("gaus"); 
+  //additive_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
+  additive_scramble_hist->SetStats(0);
+
+  // Velopix Scramble
+  Velopix_scramble_hist->Draw("sames");
+  Velopix_scramble_hist->SetLineColor(7);
+  Velopix_scramble_hist->SetLineStyle(5);
+  // Velopix_scramble_hist->Fit("gaus"); 
+  // Velopix_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
+  Velopix_scramble_hist->SetStats(0);
+  
+  // Legend
+  leg_top = new TLegend(0.65,0.6,0.9,0.9);
+  leg_top->AddEntry(un_scramble_hist,"Pre Scrambler","l");
+  leg_top->AddEntry(Karol_scramble_hist,"Karol Scrambler","l");
+  leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
+  leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
+  leg_top->Draw();
+  
+  c1->Pad()->SetLogy();
+  c1->Pad()->SetGridy();
+
+  
+  //c1->SaveAs("Chain_Length_Full_Hist_Update.pdf");
+}

@@ -8,6 +8,8 @@
 #include <assert.h>
 #include <vector>
 
+//#define __debug_mode__
+
 using namespace std;
 
 typedef bitset<30>  spp;
@@ -51,8 +53,9 @@ int main(int argc, const char * argv[])
     
   //File
   vector<fstream*> file;
-  for (int i(1); i < argc; i++)
-    file.push_back(new fstream(argv[i]));
+  file.push_back(new fstream(argv[1]));
+  for (int i(2); i < argc; i++)
+    file.push_back(new fstream(argv[i], fstream::out));
 
   int frame_count(0);
   while(!file[0]->eof())
@@ -65,7 +68,6 @@ int main(int argc, const char * argv[])
       string buffer; *file[0] >> buffer;
       data_frame[0] = str_to_frame(buffer);
       if(data_frame[0] == 0) break;     
-
 
       //SPP Handeling
       vector<spp*> data_spp;
@@ -84,28 +86,34 @@ int main(int argc, const char * argv[])
 	  }
      
       //scramble input frame and attach to output frame
-      for(int i(0); i<data_spp.size(); i++)
-	{
-	  if(i==0) //Raw Input
-	    for (int j(0); j<4; j++)
+      for (int j(0); j<4; j++)
+	for(int i(0); i<data_spp.size(); i++)
+	  {
+	    if(i==0) //Raw Input
+	      {
+	      
 	      data_spp[i][j] = frame_to_spp(data_frame[0],j);
-	  else //compute scramble algorithums for all spp's
-	    {
-	      for (int j(0); j<4; j++)
-		{
+#ifdef __debug_mode__
+	    cout << "desync9x:  " << data_spp[0][j] << endl;
+#endif
+	      }
+	    else //compute scramble algorithums for all spp's
+	      {
+		
 		data_spp[i][j] = TX_scramble[i-1](data_spp[0][j],j);
 		
 		if (data_spp[0][j] != RX_scramble[i-1](data_spp[i][j],j)) //check TX-RX reversibility
 		  cerr << "data_spp[" << i << "][" << j << "] TX-RX inconsistancy at frame: " << frame_count << endl;
 		
 		data_frame[i] = attach_spp_to_frame(data_frame[i],data_spp[i][j],j);
-		}	    
-	    }
-	}
+		
+	      }	    
+	  }
+      
 
       //write to out files
       for (int i(1); i<file.size(); i++)
-	*file[i] << data_frame[i];
+	*file[i] << data_frame[i] << endl;
     } //while !eof
   
   cout << endl << "scramble_sim: " << frame_count << " frame" << endl;
