@@ -1,0 +1,133 @@
+
+-- Translatiing the VELO scrambler into VHDL from Verilog
+-- Author Ben Jeffrey
+-- Date Created 29/10/15
+-- Algorithm by Sandeep from NIKHEF
+
+
+-- IEEE VHDL standard library:
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity VeloPixScrambler is
+  port(
+    -- clk: in std_logic;
+
+    -- rst: in std_logic;
+    frameIn: in std_logic_vector(29 downto 0);
+    state: in std_logic_vector(29 downto 0);
+    
+    -- valid_in: in std_logic;
+    -- valid_out: out std_logic;
+    nextState: out std_logic_vector(29 downto 0)
+    -- dataOutEval: out std_logic_vector(29 downto 0)
+    );
+end VeloPixScrambler;
+
+architecture a of VeloPixScrambler is
+
+  -- signal state, nextState, dataOutEval : std_logic_vector(29 downto 0);
+  -- constant reset_pattern:  std_logic_vector(29 downto 0 ) := "10" & x"AAAAAAA";
+
+--  Testing Alt reset patter
+--  constant reset_pattern:  std_logic_vector(29 downto 0 ) := (others => '0');
+--  constant reset_pattern : std_logic_vector( 29 downto 0) := (2 downto 0 => '1', others => '0');
+
+  signal myState : std_logic_vector(29 downto 0);
+  
+-------------------ALGORITHM ---------------------
+begin
+
+  myState(0)  <= frameIn(0)  XOR state(0)  XOR state(1)  XOR state(15)    XOR state(16);
+  myState(1)  <= frameIn(1)  XOR state(1)  XOR state(2)  XOR state(16)    XOR state(17);
+  myState(2)  <= frameIn(2)  XOR state(2)  XOR state(3)  XOR state(17)    XOR state(18);
+  myState(3)  <= frameIn(3)  XOR state(3)  XOR state(4)  XOR state(18)    XOR state(19);
+  myState(4)  <= frameIn(4)  XOR state(4)  XOR state(5)  XOR state(19)    XOR state(20);
+  myState(5)  <= frameIn(5)  XOR state(5)  XOR state(6)  XOR state(20)    XOR state(21);
+  myState(6)  <= frameIn(6)  XOR state(6)  XOR state(7)  XOR state(21)    XOR state(22);
+  myState(7)  <= frameIn(7)  XOR state(7)  XOR state(8)  XOR state(22)    XOR state(23);
+  myState(8)  <= frameIn(8)  XOR state(8)  XOR state(9)  XOR state(23)    XOR state(24);
+  myState(9)  <= frameIn(9)  XOR state(9)  XOR state(10) XOR state(24)    XOR state(25);
+  myState(10) <= frameIn(10) XOR state(10) XOR state(11) XOR state(25)    XOR state(26);
+  myState(11) <= frameIn(11) XOR state(11) XOR state(12) XOR state(26)    XOR state(27);
+  myState(12) <= frameIn(12) XOR state(12) XOR state(13) XOR state(27)    XOR state(28);
+  myState(13) <= frameIn(13) XOR state(13) XOR state(14) XOR state(28)    XOR state(29);
+  myState(14) <= frameIn(14) XOR state(14) XOR state(15) XOR state(29)    XOR myState(0);
+  myState(15) <= frameIn(15) XOR state(15) XOR state(16) XOR myState(0) XOR myState(1);
+  myState(16) <= frameIn(16) XOR state(16) XOR state(17) XOR myState(1) XOR myState(2);
+  myState(17) <= frameIn(17) XOR state(17) XOR state(18) XOR myState(2) XOR myState(3);
+  myState(18) <= frameIn(18) XOR state(18) XOR state(19) XOR myState(3) XOR myState(4);
+  myState(19) <= frameIn(19) XOR state(19) XOR state(20) XOR myState(4) XOR myState(5);
+  myState(20) <= frameIn(20) XOR state(20) XOR state(21) XOR myState(5) XOR myState(6);
+  myState(21) <= frameIn(21) XOR state(21) XOR state(22) XOR myState(6) XOR myState(7);
+  myState(22) <= frameIn(22) XOR state(22) XOR state(23) XOR myState(7) XOR myState(8);
+  myState(23) <= frameIn(23) XOR state(23) XOR state(24) XOR myState(8) XOR myState(9);
+  myState(24) <= frameIn(24) XOR state(24) XOR state(25) XOR myState(9) XOR myState(10);
+  myState(25) <= frameIn(25) XOR state(25) XOR state(26) XOR myState(10) XOR myState(11);
+  myState(26) <= frameIn(26) XOR state(26) XOR state(27) XOR myState(11) XOR myState(12);
+  myState(27) <= frameIn(27) XOR state(27) XOR state(28) XOR myState(12) XOR myState(13);
+  myState(28) <= frameIn(28) XOR state(28) XOR state(29) XOR myState(13) XOR myState(14);
+  myState(29) <= frameIn(29) XOR state(29) XOR myState(0) XOR myState(14) XOR myState(15);
+
+
+  --nextState(0)  <= frameIn(0)  XOR state(0)  XOR state(1)  XOR state(15)    XOR state(16);
+  --nextState(1)  <= frameIn(1)  XOR state(1)  XOR state(2)  XOR state(16)    XOR state(17);
+  --nextState(2)  <= frameIn(2)  XOR state(2)  XOR state(3)  XOR state(17)    XOR state(18);
+  --nextState(3)  <= frameIn(3)  XOR state(3)  XOR state(4)  XOR state(18)    XOR state(19);
+  --nextState(4)  <= frameIn(4)  XOR state(4)  XOR state(5)  XOR state(19)    XOR state(20);
+  --nextState(5)  <= frameIn(5)  XOR state(5)  XOR state(6)  XOR state(20)    XOR state(21);
+  --nextState(6)  <= frameIn(6)  XOR state(6)  XOR state(7)  XOR state(21)    XOR state(22);
+  --nextState(7)  <= frameIn(7)  XOR state(7)  XOR state(8)  XOR state(22)    XOR state(23);
+  --nextState(8)  <= frameIn(8)  XOR state(8)  XOR state(9)  XOR state(23)    XOR state(24);
+  --nextState(9)  <= frameIn(9)  XOR state(9)  XOR state(10) XOR state(24)    XOR state(25);
+  --nextState(10) <= frameIn(10) XOR state(10) XOR state(11) XOR state(25)    XOR state(26);
+  --nextState(11) <= frameIn(11) XOR state(11) XOR state(12) XOR state(26)    XOR state(27);
+  --nextState(12) <= frameIn(12) XOR state(12) XOR state(13) XOR state(27)    XOR state(28);
+  --nextState(13) <= frameIn(13) XOR state(13) XOR state(14) XOR state(28)    XOR state(29);
+  --nextState(14) <= frameIn(14) XOR state(14) XOR state(15) XOR state(29)    XOR frameIn(0);
+  --nextState(15) <= frameIn(15) XOR state(15) XOR state(16) XOR frameIn(0) XOR frameIn(1);
+  --nextState(16) <= frameIn(16) XOR state(16) XOR state(17) XOR frameIn(1) XOR frameIn(2);
+  --nextState(17) <= frameIn(17) XOR state(17) XOR state(18) XOR frameIn(2) XOR frameIn(3);
+  --nextState(18) <= frameIn(18) XOR state(18) XOR state(19) XOR frameIn(3) XOR frameIn(4);
+  --nextState(19) <= frameIn(19) XOR state(19) XOR state(20) XOR frameIn(4) XOR frameIn(5);
+  --nextState(20) <= frameIn(20) XOR state(20) XOR state(21) XOR frameIn(5) XOR frameIn(6);
+  --nextState(21) <= frameIn(21) XOR state(21) XOR state(22) XOR frameIn(6) XOR frameIn(7);
+  --nextState(22) <= frameIn(22) XOR state(22) XOR state(23) XOR frameIn(7) XOR frameIn(8);
+  --nextState(23) <= frameIn(23) XOR state(23) XOR state(24) XOR frameIn(8) XOR frameIn(9);
+  --nextState(24) <= frameIn(24) XOR state(24) XOR state(25) XOR frameIn(9) XOR frameIn(10);
+  --nextState(25) <= frameIn(25) XOR state(25) XOR state(26) XOR frameIn(10) XOR frameIn(11);
+  --nextState(26) <= frameIn(26) XOR state(26) XOR state(27) XOR frameIn(11) XOR frameIn(12);
+  --nextState(27) <= frameIn(27) XOR state(27) XOR state(28) XOR frameIn(12) XOR frameIn(13);
+  --nextState(28) <= frameIn(28) XOR state(28) XOR state(29) XOR frameIn(13) XOR frameIn(14);
+  --nextState(29) <= frameIn(29) XOR state(29) XOR frameIn(0) XOR frameIn(14) XOR frameIn(15);
+
+  dataOutEval <= myState;	
+  nextState <= myState;
+
+--------------- END OF ALGORITHM ---------------------
+
+  -- process(clk,rst)
+  -- begin
+  --   if rst = '1' then
+  --     --nextState <= reset_pattern;
+  --     state <= reset_pattern;
+  --     scramble_out <= (others => '0');
+  --     valid_out <= '0';
+  --   else
+  --     if rising_edge(clk) then
+        
+  --       if valid_in = '1' then
+  --         scramble_out <= dataOutEval;
+  --         state <= frameIn;
+  --       else
+          
+  --         scramble_out <= frameIn;
+  --         state <= reset_pattern;
+
+  --       end if;
+  --       valid_out <= valid_in;
+  --     end if;
+  --   end if;
+  -- end process;
+end a;

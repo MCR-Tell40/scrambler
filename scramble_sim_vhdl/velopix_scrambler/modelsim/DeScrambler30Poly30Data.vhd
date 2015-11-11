@@ -13,20 +13,20 @@ use ieee.numeric_std.all;
 -- need to create architecture
 -- need to create process
 
-entity VeloPixScrambler is
+entity VeloPixDeScrambler is
   port(
-    clk: in std_logic;
-	rst: in std_logic;
-    frameIn: in std_logic_vector(29 downto 0);
-    scramble_out: out std_logic_vector(29 downto 0)
+    frameIn:            in std_logic_vector(29 downto 0);
+    state:              in std_logic_vector(29 downto 0);
+    nextState:          out std_logic_vector(29 downto 0);
+    dataOutEval:        out std_logic_vector(29 downto 0)
     );
-end VeloPixScrambler;
+end VeloPixDeScrambler;
 
-architecture a of VeloPixScrambler is
+architecture a of VeloPixDeScrambler is
 
 
-  signal state, nextState, dataOutEval : std_logic_vector(29 downto 0);
-  constant reset_pattern:  std_logic_vector(29 downto 0 ) := "10" & x"AAAAAAA";
+  -- signal state, nextState, dataOutEval : std_logic_vector(29 downto 0);
+  -- constant reset_pattern:  std_logic_vector(29 downto 0 ) := "10" & x"AAAAAAA";
 -------------- ALGORITHM ---------------------
 begin
   dataOutEval(0) <= frameIn(0) XOR state(0) XOR state(1) XOR state(15) XOR state(16);
@@ -59,20 +59,28 @@ begin
   dataOutEval(27) <= frameIn(27) XOR state(27) XOR state(28) XOR frameIn(12) XOR frameIn(13);
   dataOutEval(28) <= frameIn(28) XOR state(28) XOR state(29) XOR frameIn(13) XOR frameIn(14);
   dataOutEval(29) <= frameIn(29) XOR state(29) XOR frameIn(0) XOR frameIn(14) xor frameIn(15);
-  nextState <= frameIn;
+
+  nextState <= frameIn;  
 
 --------------- END OF ALGORITHM ---------------------
 
-  process(clk,rst)
-	begin
-    if rst = '1' then
-      state <= reset_pattern;
-      scramble_out <= (others => '0');
-    else
-      if rising_edge(clk) then
-        scramble_out <= dataOutEval;
-        state <= nextState;
-      end if;
-    end if;
-  end process;
+  -- process(clk,rst)
+  -- begin
+  --   if rst = '1' then
+  --     state <= reset_pattern;
+  --     scramble_out <= (others => '0');
+  --     valid_out <= '0';
+  --   else
+  --     if rising_edge(clk) then
+        
+  --       if valid_in = '1' then
+  --         scramble_out <= dataOutEval;
+  --         state <= nextState;
+  --       else
+  --         scramble_out <= frameIn;
+  --       end if;
+  --       valid_out <= valid_in;
+  --     end if;
+  --   end if;
+  -- end process;
 end a;

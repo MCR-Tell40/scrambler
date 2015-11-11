@@ -1,7 +1,3 @@
-# Ignore everything ...
-*.*
-*
-
 #... but the next files:
 !.gitignore
 !desync9X.txt
@@ -22,3 +18,12 @@
 !*.h
 !make*
 !Make*
+
+*.txt
+*~
+*.bak
+*.mpf
+*.mti
+_*
+
+transcript

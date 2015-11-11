@@ -15,6 +15,7 @@ entity the_reader is
   port(
     clk_40MHz  : in  std_logic;
     rst  : in  std_logic;
+    valid_out : out std_logic;
     pixel_read1,pixel_read2,pixel_read3,pixel_read4 : out  std_logic_vector(29 downto 0)
     );
 end the_reader ;
@@ -66,6 +67,7 @@ begin
       pixel_read2 <= ( others => '0' ) ;
       pixel_read3 <= ( others => '0' ) ;
       pixel_read4 <= ( others => '0' ) ;
+      valid_out <= '0';
 
     elsif rising_edge(clk_40MHz) then	
       
@@ -79,6 +81,7 @@ begin
         pixel_read3 <= bin(59 downto 30);
         pixel_read2 <= bin(89 downto 60);
         pixel_read1 <= bin(119 downto 90);
+        valid_out <= '1';
       end if;
       
 

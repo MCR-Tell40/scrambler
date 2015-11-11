@@ -1,0 +1,186 @@
+//This file implements a 30 order polynomial based parallel scrambler. It transforms the input 30 bits parallel data to 30bits scrambled data.
+//For the VeloPix project, the input packets of 30bits are scrambled to produce 30 bits scrambled data.
+//The reset for this block is an Asynchronous active low reset
+//The block scrambles the input packet only when the scramblerEnable signal is high
+
+//Voter logic
+
+`timescale 1ns/1ps
+
+module voter30bits(a, b, c, y);
+   input wire [29:0] a, b, c;
+   output wire [29:0] y;
+   assign y = a&b | a&c | b&c;
+endmodule
+
+//Combinational block
+module scramblerFlowControl (
+			     // Inputs:
+			     input [29:0]      dataIn,
+			     input 	       scrambleEnable,
+			     input [29:0]      state,
+
+			     // Outputs:
+			     output reg [29:0] nextState,
+			     output reg [29:0] dataOutEval);
+
+   always @(state or dataIn or scrambleEnable)
+     begin
+
+	if (scrambleEnable == 1'b1)
+	  begin
+	     nextState[0] = dataIn[0] ^ state[0] ^ state[1] ^ state[15] ^ state[16];
+	     nextState[1] = dataIn[1] ^ state[1] ^ state[2] ^ state[16] ^ state[17];
+	     nextState[2] = dataIn[2] ^ state[2] ^ state[3] ^ state[17] ^ state[18];
+	     nextState[3] = dataIn[3] ^ state[3] ^ state[4] ^ state[18] ^ state[19];
+	     nextState[4] = dataIn[4] ^ state[4] ^ state[5] ^ state[19] ^ state[20];
+	     nextState[5] = dataIn[5] ^ state[5] ^ state[6] ^ state[20] ^ state[21];
+	     nextState[6] = dataIn[6] ^ state[6] ^ state[7] ^ state[21] ^ state[22];
+	     nextState[7] = dataIn[7] ^ state[7] ^ state[8] ^ state[22] ^ state[23];
+	     nextState[8] = dataIn[8] ^ state[8] ^ state[9] ^ state[23] ^ state[24];
+	     nextState[9] = dataIn[9] ^ state[9] ^ state[10] ^ state[24] ^ state[25];
+	     nextState[10] = dataIn[10] ^ state[10] ^ state[11] ^ state[25] ^ state[26];
+	     nextState[11] = dataIn[11] ^ state[11] ^ state[12] ^ state[26] ^ state[27];
+	     nextState[12] = dataIn[12] ^ state[12] ^ state[13] ^ state[27] ^ state[28];
+	     nextState[13] = dataIn[13] ^ state[13] ^ state[14] ^ state[28] ^ state[29];
+	     nextState[14] = dataIn[14] ^ state[14] ^ state[15] ^ state[29] ^ nextState[0];
+	     nextState[15] = dataIn[15] ^ state[15] ^ state[16] ^ nextState[0] ^ nextState[1];
+	     nextState[16] = dataIn[16] ^ state[16] ^ state[17] ^ nextState[1] ^ nextState[2];
+	     nextState[17] = dataIn[17] ^ state[17] ^ state[18] ^ nextState[2] ^ nextState[3];
+	     nextState[18] = dataIn[18] ^ state[18] ^ state[19] ^ nextState[3] ^ nextState[4];
+	     nextState[19] = dataIn[19] ^ state[19] ^ state[20] ^ nextState[4] ^ nextState[5];
+	     nextState[20] = dataIn[20] ^ state[20] ^ state[21] ^ nextState[5] ^ nextState[6];
+	     nextState[21] = dataIn[21] ^ state[21] ^ state[22] ^ nextState[6] ^ nextState[7];
+	     nextState[22] = dataIn[22] ^ state[22] ^ state[23] ^ nextState[7] ^ nextState[8];
+	     nextState[23] = dataIn[23] ^ state[23] ^ state[24] ^ nextState[8] ^ nextState[9];
+	     nextState[24] = dataIn[24] ^ state[24] ^ state[25] ^ nextState[9] ^ nextState[10];
+	     nextState[25] = dataIn[25] ^ state[25] ^ state[26] ^ nextState[10] ^ nextState[11];
+	     nextState[26] = dataIn[26] ^ state[26] ^ state[27] ^ nextState[11] ^ nextState[12];
+	     nextState[27] = dataIn[27] ^ state[27] ^ state[28] ^ nextState[12] ^ nextState[13];
+	     nextState[28] = dataIn[28] ^ state[28] ^ state[29] ^ nextState[13] ^ nextState[14];
+	     nextState[29] = dataIn[29] ^ state[29] ^ nextState[0] ^ nextState[14] ^ nextState[15];
+	     dataOutEval = nextState;
+	  end
+	else
+	  begin	
+	     nextState = state;
+	     dataOutEval = dataIn;
+	  end
+     end
+endmodule
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------- //
+  // -------------------------------------------------------------------------------------------------------------------------------------------------- //
+  // -------------------------------------------------------------------------------------------------------------------------------------------------- //
+
+// Sequential block
+module scramblerInitializationRegisters (
+					 input wire 	   clock,
+					 input wire 	   reset,
+					 input wire [29:0] nextStateA, nextStateB, nextStateC,
+					 input wire [29:0] dataOutEvalA, dataOutEvalB, dataOutEvalC,
+					 output reg [29:0] state,
+					 output reg [29:0] dataOut
+					 );
+
+   // -------------------------------------------------------------------------------------------------------------------------------------------------- //
+   // -------------------------------------------------------------------------------------------------------------------------------------------------- //
+   // -------------------------------------------------------------------------------------------------------------------------------------------------- //
+
+   wire [29:0] 						   nextState;
+   wire [29:0] 						   dataOutEval;
+
+   voter30bits V30B1(.a(nextStateA), .b(nextStateB), .c(nextStateC), .y(nextState));
+   voter30bits V30B2(.a(dataOutEvalA), .b(dataOutEvalB), .c(dataOutEvalC), .y(dataOutEval));
+
+   always @(negedge clock or negedge reset)
+     begin
+	if (reset == 1'b0) 
+	  begin
+	     state <= 30'b101010101010101010101010101010; //Can be loaded with any seed
+	     dataOut <= 30'b000000000000000000000000000000;
+	  end
+	else 
+	  begin
+    	     state <= nextState;
+    	     dataOut <= dataOutEval;
+	  end
+     end
+
+
+endmodule
+
+//Topmodule
+module scramblerTopModule (
+			   input 	      clockA, clockB, clockC,
+			   input 	      resetA, resetB, resetC,
+			   input 	      scrambleEnableA, scrambleEnableB, scrambleEnableC,
+			   input wire [29:0]  dataInA, dataInB, dataInC,
+			   // Outputs:
+			   output wire [29:0] dataOut
+			   );
+
+   wire [29:0] 				      stateA, stateB, stateC;
+   wire [29:0] 				      nextStateA, nextStateB, nextStateC;
+   wire [29:0] 				      dataOutEvalA, dataOutEvalB, dataOutEvalC;
+   wire [29:0] 				      dataOutA, dataOutB, dataOutC;
+
+   scramblerFlowControl FC1(
+			    .dataIn(dataInA),
+			    .scrambleEnable(scrambleEnableA),
+			    .state(stateA),
+      
+			    // Outputs:
+			    .nextState(nextStateA),
+			    .dataOutEval(dataOutEvalA)
+			    );
+   scramblerFlowControl FC2(
+			    .dataIn(dataInB),
+			    .scrambleEnable(scrambleEnableB),
+			    .state(stateB),
+      
+			    // Outputs:
+			    .nextState(nextStateB),
+			    .dataOutEval(dataOutEvalB)
+			    );
+
+   scramblerFlowControl FC3(
+			    .dataIn(dataInC),
+			    .scrambleEnable(scrambleEnableC),
+			    .state(stateC),
+      
+			    // Outputs:
+			    .nextState(nextStateC),
+			    .dataOutEval(dataOutEvalC)
+			    );
+
+   scramblerInitializationRegisters IR1(
+					.clock(clockA),
+					.reset(resetA),
+					.nextStateA(nextStateA), .nextStateB(nextStateB), .nextStateC(nextStateC),
+					.dataOutEvalA(dataOutEvalA), .dataOutEvalB(dataOutEvalB), .dataOutEvalC(dataOutEvalC),
+					.state(stateA),
+					.dataOut(dataOutA)
+					);
+
+   scramblerInitializationRegisters IR2(
+					.clock(clockB),
+					.reset(resetB),
+					.nextStateA(nextStateB), .nextStateB(nextStateC), .nextStateC(nextStateA),
+					.dataOutEvalA(dataOutEvalB), .dataOutEvalB(dataOutEvalC), .dataOutEvalC(dataOutEvalA),
+					.state(stateB),
+					.dataOut(dataOutB)
+					);
+
+   scramblerInitializationRegisters IR3(
+					.clock(clockC),
+					.reset(resetC),
+					.nextStateA(nextStateC), .nextStateB(nextStateA), .nextStateC(nextStateB),
+					.dataOutEvalA(dataOutEvalC), .dataOutEvalB(dataOutEvalA), .dataOutEvalC(dataOutEvalB),
+					.state(stateC),
+					.dataOut(dataOutC)
+					);
+   voter30bits V30B1(.a(dataOutA), .b(dataOutB), .c(dataOutC), .y(dataOut)); //Majority voter for the output
+
+endmodule
