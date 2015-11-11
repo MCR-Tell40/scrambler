@@ -1,6 +1,3 @@
-# Ignore everything ...
-*.*
-*
 
 #... but the next files:
 !.gitignore
