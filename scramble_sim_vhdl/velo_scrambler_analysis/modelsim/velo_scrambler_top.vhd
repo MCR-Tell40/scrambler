@@ -20,7 +20,7 @@ architecture a of velo_scrambler_top is
   
   
 ---- put in scrambling component
-  component VeloPixScrambler is
+  component VeloPixDeScrambler is
     port(
       clk,rst: in std_logic;
       frameIn: in std_logic_vector(29 downto 0);
@@ -49,7 +49,16 @@ end component;
       ) ;
   end COMPONENT ;
   
-  
+  Component VeloPixScrambler is
+  port(
+    clk: in std_logic;
+    rst: in std_logic;
+    valid_in: in std_logic;
+    valid_out: out std_logic;
+    frameIn: in std_logic_vector(29 downto 0);
+    scramble_out: out std_logic_vector(29 downto 0)
+    );
+end component;
 
   constant reset_pattern_reg	   : std_logic_vector(29 downto 0) := (others => '0');
   SIGNAL reset_reg, clock160_reg	: std_logic;
@@ -119,7 +128,7 @@ BEGIN
 
 
 
- descramble_inst1 : VeloPixScrambler
+ descramble_inst1 : VeloPixDeScrambler
     port map (
       clk => clock160_reg,
 	rst => reset_reg,
@@ -130,7 +139,7 @@ BEGIN
       );
  
   
-  descramble_inst2 : VeloPixScrambler
+  descramble_inst2 : VeloPixDeScrambler
     port map (
       clk => clock160_reg,
 	rst => reset_reg,
@@ -140,7 +149,7 @@ BEGIN
       valid_out => valid_descramble_write2
       );
   
-  descramble_inst3 : VeloPixScrambler
+  descramble_inst3 : VeloPixDeScrambler
     port map (
       clk => clock160_reg,
 	rst => reset_reg,
@@ -150,7 +159,7 @@ BEGIN
       valid_out => valid_descramble_write4
       );
   
-  descramble_inst4 : VeloPixScrambler
+  descramble_inst4 : VeloPixDeScrambler
     port map (
       clk => clock160_reg,
 	rst => reset_reg,
@@ -176,15 +185,15 @@ BEGIN
 
   write_inst2 : the_writer
     PORT MAP (
-      pixel_write1       => read_to_scramble1,
-      pixel_write2       => read_to_scramble2,
-      pixel_write3       => read_to_scramble3,
-      pixel_write4       => read_to_scramble4,
+      pixel_write1       => scramble_to_descramble1,
+      pixel_write2       => scramble_to_descramble2,
+      pixel_write3       =>  scramble_to_descramble3,
+      pixel_write4       =>  scramble_to_descramble4,
       rst	        => reset_reg,
       file_name         => "before_scrambler.txt",
       file_name2        => "pre_transitions.txt",
       clk_40MHz	        => clock160_reg,
-      valid_in          => valid_read_scramble
+      valid_in          => valid_scramble_descramble1
       );
 
 

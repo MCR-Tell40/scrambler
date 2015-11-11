@@ -7,166 +7,166 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 d/home/velo/Documents/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim
+d/home/velo/Documents/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim
 Ethe_reader
-Z1 w1447164823
-Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
-Z4 d/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim
-Z5 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
-Z6 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
+Z0 w1447165263
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 d/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim
+Z4 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
+Z5 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
 l0
 L13
 VNL[]oO>?n599SI8aMS_A;1
 !s100 2FR]Gikk4om`b^96FdI0G1
-Z7 OL;C;10.3a;59
+Z6 OL;C;10.3a;59
 32
-Z8 !s110 1447164965
+Z7 !s110 1447167119
 !i10b 1
-Z9 !s108 1447164965.330144
-Z10 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd|
-Z11 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd|
+Z8 !s108 1447167119.728330
+Z9 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd|
+Z10 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd|
 !i113 0
-Z12 o-work work -2002 -explicit
-Z13 tExplicit 1
+Z11 o-work work -2002 -explicit
+Z12 tExplicit 1
 Ar
+R1
 R2
-R3
 DEx4 work 10 the_reader 0 22 NL[]oO>?n599SI8aMS_A;1
+32
+R7
 l52
 L24
 VEdKol1?b9j=Z7g<aE^zHL2
 !s100 IfM8U^cmNFhW3_JW=<H<A1
-R7
-32
-R8
+R6
 !i10b 1
+R8
 R9
 R10
-R11
 !i113 0
+R11
 R12
-R13
 Ethe_writer
+R0
+Z13 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 R1
-Z14 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 R2
 R3
-R4
-Z15 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd
-Z16 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd
+Z14 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd
+Z15 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd
 l0
 L21
 VclmkPeEGSKCbX5iVJ1NRZ0
 !s100 nnD5YRT01ZLC;z4L=HSec2
-R7
+R6
 32
-R8
+R7
 !i10b 1
-Z17 !s108 1447164965.400844
-Z18 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd|
-Z19 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd|
+Z16 !s108 1447167119.796333
+Z17 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd|
+Z18 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/writer.vhd|
 !i113 0
+R11
 R12
-R13
 Aw
-R14
+R13
+R1
 R2
-R3
-Z20 DEx4 work 10 the_writer 0 22 clmkPeEGSKCbX5iVJ1NRZ0
+DEx4 work 10 the_writer 0 22 clmkPeEGSKCbX5iVJ1NRZ0
+32
+R7
 l46
 L31
-Z21 V`Bc9F7Akbmn`X6HGoB3dE1
-Z22 !s100 I`l;ciT9kGSVbF4@UQNWN3
-R7
-32
-R8
+V`Bc9F7Akbmn`X6HGoB3dE1
+!s100 I`l;ciT9kGSVbF4@UQNWN3
+R6
 !i10b 1
+R16
 R17
 R18
-R19
 !i113 0
+R11
 R12
-R13
 Evelo_scrambler_top
+Z19 w1447166939
+Z20 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 R1
-Z23 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 R2
 R3
-R4
-Z24 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd
-Z25 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd
+Z21 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd
+Z22 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd
 l0
 L10
 V:^le>fUhlaJkgf@dVZ]2C1
 !s100 >TM^`h9WC[YY>bcz>H6;Q1
-R7
+R6
 32
-R8
+R7
 !i10b 1
-Z26 !s108 1447164965.366118
-Z27 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd|
-Z28 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd|
+Z23 !s108 1447167119.758490
+Z24 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd|
+Z25 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd|
 !i113 0
+R11
 R12
-R13
 Aa
-R23
-R2
-R3
-DEx4 work 18 velo_scrambler_top 0 22 :^le>fUhlaJkgf@dVZ]2C1
-l65
-L19
-V39zK@L5z0?><lLV]513cD1
-!s100 e<8:a@emcjPLMaHz6O?i:3
-R7
-32
-R8
-!i10b 1
-R26
-R27
-R28
-!i113 0
-R12
-R13
-Evelopixscrambler
+R20
 R1
+R2
+DEx4 work 18 velo_scrambler_top 0 22 :^le>fUhlaJkgf@dVZ]2C1
+32
+R7
+l74
+L19
+VOSg@`K927XbO>DGb^[naX2
+!s100 `X]jbR`@P08BV_=4`E`Rm0
+R6
+!i10b 1
 R23
+R24
+R25
+!i113 0
+R11
+R12
+Evelopixscrambler
+Z26 w1447167022
+R20
+R1
 R2
 R3
-R4
-Z29 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd
-Z30 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd
+Z27 8/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd
+Z28 F/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd
 l0
-L16
-V]Ac7l88hQSoP2AiCB]]Qj3
-!s100 PPSK@RmdF:hoMh42AlN<J3
-R7
+L17
+VdZY>AUI9c0;8okm_dR7L>1
+!s100 SIf9a?CRd0aJSV:@IlS7_1
+R6
 32
-R8
+R7
 !i10b 1
-Z31 !s108 1447164965.282527
-Z32 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd|
-Z33 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd|
+Z29 !s108 1447167119.828067
+Z30 !s90 -reportprogress|300|-stats=none|-work|work|-2002|-explicit|-vopt|/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd|
+Z31 !s107 /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd|
 !i113 0
+R11
 R12
-R13
 Aa
-R23
+R20
+R1
 R2
-R3
-DEx4 work 16 velopixscrambler 0 22 ]Ac7l88hQSoP2AiCB]]Qj3
-l33
-L27
-VAHV8@6AF7IRWo0oW5?B`]3
-!s100 21RHKUa`AU3PQ5g;S=0^I1
-R7
+DEx4 work 16 velopixscrambler 0 22 dZY>AUI9c0;8okm_dR7L>1
 32
-R8
+R7
+l37
+L28
+Vk4KdFlN>VK:48Hl8@1SDF1
+!s100 >Q3c8EEKEmGazz8EeMn;f2
+R6
 !i10b 1
+R29
+R30
 R31
-R32
-R33
 !i113 0
+R11
 R12
-R13
