@@ -1,4 +1,4 @@
-/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd
+/DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd
 Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -7,7 +7,7 @@ Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Compiling entity VeloPixScrambler
 -- Compiling architecture a of VeloPixScrambler
 
-} {} {}} /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler.vhd
+} {} {}} /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/DeScrambler30Poly30Data.vhd
 Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -25,14 +25,6 @@ Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Compiling entity the_writer
 -- Compiling architecture w of the_writer
 
-} {} {}} /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
-Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity the_reader
--- Compiling architecture r of the_reader
-
 } {} {}} /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/velo_scrambler_top.vhd
 Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Loading package STANDARD
@@ -41,5 +33,13 @@ Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
 -- Loading package NUMERIC_STD
 -- Compiling entity velo_scrambler_top
 -- Compiling architecture a of velo_scrambler_top
+
+} {} {}} /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd {1 {vcom -stats=none -work work -2002 -explicit -vopt /DATAPART1/Pablo/students/scrambler/scramble_sim_vhdl/velo_scrambler_analysis/modelsim/read_in_30_bit.vhd
+Model Technology ModelSim SE-64 vcom 10.3a Compiler 2014.04 Apr 13 2014
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity the_reader
+-- Compiling architecture r of the_reader
 
 } {} {}}
