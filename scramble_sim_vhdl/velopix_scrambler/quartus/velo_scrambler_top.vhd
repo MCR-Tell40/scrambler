@@ -57,15 +57,15 @@ architecture a of velo_scrambler_top is
   end component deScramblerFlowControl;
 
   
-  COMPONENT the_reader is
-    
-    port(
-      clk_40MHz  : in  std_logic;
-      rst  : in  std_logic;
-      valid_out : out std_logic;
-      pixel_read1, pixel_read2, pixel_read3, pixel_read4 : out  std_logic_vector(29 downto 0)
-      );
-  end COMPONENT ;
+--  COMPONENT the_reader is
+--    
+--    port(
+--      clk_40MHz  : in  std_logic;
+--      rst  : in  std_logic;
+--      valid_out : out std_logic;
+--      pixel_read1, pixel_read2, pixel_read3, pixel_read4 : out  std_logic_vector(29 downto 0)
+--      );
+--  end COMPONENT ;
 
   
   COMPONENT the_writer IS
@@ -104,16 +104,16 @@ architecture a of velo_scrambler_top is
   
 BEGIN
   
-  read_inst1 : the_reader
-    PORT MAP (
-      clk_40MHz         => clock160_reg,
-      rst	        => reset_reg,
-      pixel_read1 	=> read_to_scramble1,
-      pixel_read2       => read_to_scramble2,
-      pixel_read3       => read_to_scramble3,
-      pixel_read4       => read_to_scramble4,
-      valid_out => valid_read_scramble
-      );
+--  read_inst1 : the_reader
+--    PORT MAP (
+--      clk_40MHz         => clock160_reg,
+--      rst	        => reset_reg,
+--      pixel_read1 	=> read_to_scramble1,
+--      pixel_read2       => read_to_scramble2,
+--      pixel_read3       => read_to_scramble3,
+--      pixel_read4       => read_to_scramble4,
+--      valid_out => valid_read_scramble
+--      );
 
 
   scramble_inst1 : VeloPixScrambler
@@ -190,8 +190,8 @@ BEGIN
 
     ELSIF rising_edge(csi_Clock_160MHz) THEN
 
-      --dataIn <= "01" & x"50503bf";
-      dataIn <= read_to_scramble1;
+      dataIn <= "01" & x"50503bf";
+      --dataIn <= read_to_scramble1;
       state_vhdl <= dataOutEval_vhdl;
       state_descr_vhdl <= nextState_descr_vhdl;
       state_verilog <= dataOutEval_verilog;

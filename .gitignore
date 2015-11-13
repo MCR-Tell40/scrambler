@@ -1,4 +1,4 @@
-#... but the next files:
+#Extensions we don't want to ignore
 !.gitignore
 !desync9X.txt
 !desyncFilter.txt
@@ -19,6 +19,8 @@
 !make*
 !Make*
 
+#What we want to ignore:
+
 *.txt
 *~
 *.bak
@@ -27,3 +29,22 @@
 _*
 
 transcript
+
+#Quartus not necessary files:
+*.dat
+*.qmsg
+*.cdb
+*.rdb
+*.kpt
+*.*info
+*.rbd
+*.ammdb
+*.map*
+*.ddb
+*.cdb
+*.nvd
+*.sci
+*.dpi
+*.hdb
+*.rpt
+*.done
