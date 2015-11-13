@@ -1,5 +1,6 @@
-restart -f
-vsim -c -t ps -novopt work.velo_scrambler_top
+#quit -sim 
+#restart -f
+#vsim -c -t ps -novopt work.velo_scrambler_top
 
 add wave -divider Top
 add wave -position end  sim:/velo_scrambler_top/csi_Clock_160MHz
@@ -9,7 +10,6 @@ add wave -position end  sim:/velo_scrambler_top/read_inst1/pixel_read1
 add wave -divider Scrambler
 add wave -position end  sim:/velo_scrambler_top/scramble_inst1/dataIn
 add wave -position end  sim:/velo_scrambler_top/scramble_inst1/state
-add wave -position end  sim:/velo_scrambler_top/scramble_inst1/nextState
 add wave -position end  sim:/velo_scrambler_top/scramble_inst1/dataOutEval
 
 add wave -divider DeScrambler_VHDL
@@ -34,3 +34,5 @@ force -freeze sim:/velo_scrambler_top/csi_Clock_160MHz 1 0, 0 {3125 ps} -r 6.25n
 force -freeze sim:/velo_scrambler_top/rsi_Reset 1,0 1ns
 
 config wave -signalnamewidth 1
+
+run 50ns
