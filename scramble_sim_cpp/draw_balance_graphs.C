@@ -16,7 +16,8 @@ void draw_balance_graphs()
   additive_graph->SetLineWidth(2);
   additive_graph->GetXaxis()->SetTitle("Frame #");
   additive_graph->GetYaxis()->SetTitle("(#1 - #0)");
-  additive_graph->GetYaxis()->SetRangeUser(-17000,40000);
+  additive_graph->GetYaxis()->SetRangeUser(-17000,8000);
+  additive_graph->GetXaxis()->SetRangeUser(0,335e3);
   additive_graph->SetTitle("Evolution in the Balance of 1s and 0s");
 
   Karol_graph->Draw("same");
@@ -32,7 +33,7 @@ void draw_balance_graphs()
   velopix_graph->SetLineColor(8);
   velopix_graph->SetLineWidth(2);
 
-  TLegend* leg = new TLegend(0.7,0.5,0.9,0.6);
+  TLegend* leg = new TLegend(0.7,0.82,0.9,0.9);
   leg->AddEntry(desync9X_graph,"Dysync 9X","l");
   leg->AddEntry(velopix_graph,"VeloPix Scrambler","l");
   leg->AddEntry(Karol_graph,"Karol Scrambler","l");

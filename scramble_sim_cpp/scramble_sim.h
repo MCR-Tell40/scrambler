@@ -9,6 +9,7 @@
 #include <vector>
 
 //#define __debug_mode__
+//#define __desync_event__
 
 using namespace std;
 
@@ -76,7 +77,7 @@ int main(int argc, const char * argv[])
 
       // ---- debugging ----
       frame_count++;
-      if (frame_count % 10000 == 0) cout << frame_count << " | ";
+      if (frame_count % 10000 == 0) cout << frame_count << endl;
 
       //attach header and parity info from input to output frames
       for (int i(1); i < data_frame.size(); i++)
@@ -102,6 +103,9 @@ int main(int argc, const char * argv[])
 		
 		data_spp[i][j] = TX_scramble[i-1](data_spp[0][j],j);
 		
+#ifdef __desync_event__
+		if (frame_count > 5 && j == 0)
+#endif
 		if (data_spp[0][j] != RX_scramble[i-1](data_spp[i][j],j)) //check TX-RX reversibility
 		  cerr << "data_spp[" << i << "][" << j << "] TX-RX inconsistancy at frame: " << frame_count << endl;
 		

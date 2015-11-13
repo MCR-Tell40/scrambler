@@ -10,6 +10,7 @@
 #include <TVectorfwd.h>
 #include <TMatrix.h>
 #include <string>
+#include <sstream>
 #include <bitset>
 #include <vector>
 
@@ -25,19 +26,21 @@ vector<fstream*> input_file;
 TFile   * output_file;
 
 //graphs
-vector<TGraph*> graph;
+vector<TGraph*> true_graph;
+vector<TGraph*> abs_graph;
 //TGraph un_scrambled_graph;
 //TGraph new_scrambled_graph;
 //TGraph old_scrambled_graph;
 
-vector<vector<int>> balance;
+vector<vector<int>> true_balance;
+vector<vector<int>> abs_balance;
 //vector<int> un_scrambled_balance;
 //vector<int> new_scrambled_balance;
 //vector<int> old_scrambled_balance;
 
 //funcitons
-void fillVector    (fstream* file, vector<int>& balance);
-void draw_graph    (TGraph*, vector<int>, string);
+void fillVector    (fstream* file, vector<int>& _true, vector<int>& _abs);
+void draw_graph    (TGraph* true_, TGraph* abs_, vector<int> true__, vector<int> abs__, string);
 frame str_to_frame (string);
             
 int main(int argc, const char ** argv)
@@ -69,16 +72,15 @@ int main(int argc, const char ** argv)
 
   for(int i(0); i<argc-2; i++)
     {
-      graph.push_back(new TGraph());
-      balance.push_back(vector<int>());
-      fillVector(input_file[i], balance[i]);    
+      true_graph.push_back(new TGraph());
+      abs_graph.push_back(new TGraph());
+      true_balance.push_back(vector<int>());
+      abs_balance.push_back(vector<int>());
+      fillVector(input_file[i], true_balance[i], abs_balance[i]);    
 #ifdef __DEBUG__
       cout << "Vector Filled" <<endl;
 #endif
-      draw_graph(graph[i], balance[i], argv[i+1]);
-#ifdef __DEBUG__
-      cout << "Graph Created" <<endl;
-#endif
+      draw_graph(true_graph[i],abs_graph[i], true_balance[i], abs_balance[i], argv[i+1]);
     }
 
     

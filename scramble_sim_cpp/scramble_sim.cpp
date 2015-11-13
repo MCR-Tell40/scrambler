@@ -271,6 +271,7 @@ spp VeloPix_scramble_TX(spp frameIn, int i)
 {
   int initial_value = 0x2AAAAAAA;
   static spp state [4] = {initial_value,initial_value,initial_value,initial_value};
+  static spp nextstate [4] = {0,0,0,0};
   // static spp COMMON_FRAME_2_TX [4] = {0,0,0,0};
   
   spp dataOutEval(0);
@@ -305,14 +306,13 @@ spp VeloPix_scramble_TX(spp frameIn, int i)
   dataOutEval[27] = frameIn[27] ^ state[i][27] ^ state[i][28] ^ dataOutEval[12]  ^ dataOutEval[13];
   dataOutEval[28] = frameIn[28] ^ state[i][28] ^ state[i][29] ^ dataOutEval[13]  ^ dataOutEval[14];
   dataOutEval[29] = frameIn[29] ^ state[i][29] ^ dataOutEval[0]   ^ dataOutEval[14]  ^ dataOutEval[15];
- 
-  state[i]=frameIn;
 
 #ifdef __debug_mode__
   cout << "velopix TX:" << dataOutEval << endl;
 #endif
-
  
+  state[i] = dataOutEval;
+
   return dataOutEval;
 }
 
