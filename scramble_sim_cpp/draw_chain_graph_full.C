@@ -79,13 +79,23 @@ void draw_chain_graph_full()
   // Legend
   leg_top = new TLegend(0.65,0.6,0.9,0.9);
   leg_top->AddEntry(un_scramble_hist,"Pre Scrambler","l");
-  leg_top->AddEntry(Karol_scramble_hist,"Karol Scrambler","l");
+  leg_top->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
   leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
   leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
   leg_top->Draw();
 
 
   c1->Pad()->SetGridy();
+
+
+TPaveText *myText= new TPaveText(0.25,0.92,0.61,0.99, "NDC");
+//NDC sets coords relative to pad
+myText->SetTextSize(0.05);
+myText->SetFillColor(0);        
+//white background
+myText->SetTextAlign(12);
+myTextEntry=myText->AddText("All Chain Lengths - Arithmetic Scale");
+myText->Draw();
 
   //----------------------Bottom graph-------------//
   c1->cd(2);
@@ -136,7 +146,7 @@ void draw_chain_graph_full()
   // Legend
   leg_top = new TLegend(0.65,0.6,0.9,0.9);
   leg_top->AddEntry(un_scramble_hist,"Pre Scrambler","l");
-  leg_top->AddEntry(Karol_scramble_hist,"Karol Scrambler","l");
+  leg_top->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
   leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
   leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
   leg_top->Draw();
@@ -146,4 +156,15 @@ void draw_chain_graph_full()
 
   
   //c1->SaveAs("Chain_Length_Full_Hist_Update.pdf");
+
+TPaveText *myText2= new TPaveText(0.25,0.92,0.62,0.99, "NDC");
+//NDC sets coords relative to pad
+myText2->SetTextSize(0.05);
+myText2->SetFillColor(0);        
+//white background
+myText2->SetTextAlign(12);
+myTextEntry=myText2->AddText("All Chain Lengths - Logarithmic Scale");
+myText2->Draw();
+
+
 }

@@ -40,10 +40,11 @@ void draw_transition_graph_full()
 
   // Velopix Scramble
   velopix_scramble_hist->Draw("sames");
-  velopix_scramble_hist->SetLineColor(8);
+  velopix_scramble_hist->SetLineColor(7);
   velopix_scramble_hist->SetLineStyle(1);
   velopix_scramble_hist->Fit("gaus"); 
-  velopix_scramble_hist->GetFunction("gaus")->SetLineColor(8); 
+  velopix_scramble_hist->GetFunction("gaus")->SetLineColor(7);
+  velopix_scramble_hist->GetFunction("gaus")->SetLineStyle(2); 
   velopix_scramble_hist->SetStats(0);
   
   // Legend
@@ -98,7 +99,7 @@ void draw_transition_graph_full()
   leg->AddEntry(velopix_scramble_hist,"Velopix Scrambler","l");
   leg->AddEntry(velopix_scramble_hist,velopix_scramble_mean.c_str(),"");
   leg->AddEntry(velopix_scramble_hist,velopix_scramble_sigma.c_str(),"");
-  leg->AddEntry(Karol_scramble_hist,"Karol Scrambler","l");
+  leg->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
   leg->AddEntry(Karol_scramble_hist,Karol_scramble_mean.c_str(),"");
   leg->AddEntry(Karol_scramble_hist,Karol_scramble_sigma.c_str(),"");
   leg->AddEntry(additive_scramble_hist,"Additive Scrambler","l");

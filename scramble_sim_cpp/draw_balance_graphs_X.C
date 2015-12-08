@@ -12,7 +12,7 @@ void draw_balance_graphs_X()
 
   TCanvas* true_c1 = new TCanvas("Evolution in the Balance of 1s and 0s",
 			    "Evolution in the Balance of 1s and 0s",
-			    900,600);
+			    2700,1800);
   true_c1->Pad()->SetGridy();
 
   true_additive_graph->Draw("AL");
@@ -34,13 +34,13 @@ void draw_balance_graphs_X()
   //desync9X_graph->SetLineWidth(2);
 
   true_velopix_graph->Draw("same");
-  true_velopix_graph->SetLineColor(8);
+  true_velopix_graph->SetLineColor(7);
   true_velopix_graph->SetLineWidth(2);
 
   TLegend* true_leg = new TLegend(0.7,0.82,0.9,0.9);
   //  true_leg->True_AddEntry(desync9X_graph,"Dysync 9X","l");
   true_leg->AddEntry(true_velopix_graph,"VeloPix Scrambler","l");
-  true_leg->AddEntry(true_Karol_graph,"Karol Scrambler","l");
+  true_leg->AddEntry(true_Karol_graph,"Intermediate Scrambler","l");
   true_leg->AddEntry(true_additive_graph,"Additive Scrambler","l");
   true_leg->Draw();
 
@@ -52,7 +52,7 @@ void draw_balance_graphs_X()
 
   TCanvas* abs_c1 = new TCanvas("Evolution in the Absolute Value of Balance of 1s and 0",
 			    "Evolution in the Absolute Value of Balance of 1s and 0s",
-			    900,600);
+			    2700,1800);
   abs_c1->Pad()->SetGridy();
 
   abs_additive_graph->Draw("AL");
@@ -74,13 +74,13 @@ void draw_balance_graphs_X()
   //desync9X_graph->SetLineWidth(2);
 
   abs_velopix_graph->Draw("same");
-  abs_velopix_graph->SetLineColor(8);
+  abs_velopix_graph->SetLineColor(7);
   abs_velopix_graph->SetLineWidth(2);
 
   TLegend* abs_leg = new TLegend(0.7,0.82,0.9,0.9);
   //  abs_leg->Abs_AddEntry(desync9X_graph,"Dysync 9X","l");
   abs_leg->AddEntry(abs_velopix_graph,"VeloPix Scrambler","l");
-  abs_leg->AddEntry(abs_Karol_graph,"Karol Scrambler","l");
+  abs_leg->AddEntry(abs_Karol_graph,"Intermediate Scrambler","l");
   abs_leg->AddEntry(abs_additive_graph,"Additive Scrambler","l");
   abs_leg->Draw();
 
