@@ -31,28 +31,28 @@ void   draw_graphs       ();
 int    transition_count  (frame);
 frame  str_to_frame      (string);
 void   save_graphs       ();
-            
+
 int main(int argc, const char ** argv)
 {
   if (argc == 1)
-    {
-      cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <additive_scrambled> <output_file>" << endl;
-      return 1;
-    }
+  {
+    cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <additive_scrambled> <output_file>" << endl;
+    return 1;
+  }
   else
-    {
-      for (int i(1); i <argc-1; i++)
-	input_file.push_back(new fstream(argv[i],fstream::in));
-
-      output_file = new TFile(argv[argc-1], "RECREATE");
-    }
+  {
+    for (int i(1); i <argc-1; i++)
+      input_file.push_back(new fstream(argv[i],fstream::in));
+    
+    output_file = new TFile(argv[argc-1], "RECREATE");
+  }
   
   graph_init();
   
   draw_graphs();
 
   save_graphs();
-    
+  
   return 0;
 }
 

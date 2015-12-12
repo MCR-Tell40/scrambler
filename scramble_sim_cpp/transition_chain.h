@@ -34,7 +34,7 @@ void save_graphs();
             
 int main(int argc, const char ** argv)
 {
-    if (argc != 5)
+    if (argc != 6)
     {
         cout << "Invalid arguments, please use form: $ <executable> <unscrambled> <new_scrambled> <old_scrambled> <output_file>" << endl;
         return 1;

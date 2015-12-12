@@ -26,6 +26,12 @@ void graph_init()
 				  "Chain Lengths in Additive-Scrambled Data",
 				  30,0,30
 				  ));
+  if (input_file.size()>=5)
+    histogram.push_back( new TH1F(
+				  "Random_data_hist",
+				  "Chain Lengths in Random Data",
+				  30,0,30
+				  ));
 }
 
 void draw_graphs()
