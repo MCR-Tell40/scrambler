@@ -6,7 +6,7 @@ void draw_chain_graph_full()
   TH1F *Karol_scramble_hist = (TH1F*)f->Get("Karol_scrambler_hist");
   TH1F *additive_scramble_hist = (TH1F*)f->Get("additive_scrambler_hist");
   TH1F *Velopix_scramble_hist = (TH1F*)f->Get("Velopix_scrambler_hist");
-
+  TH1F *Random_data_hist = (TH1F*)f->Get("Random_data_hist");
   // gStyle->SetOptStat(0000000000);
   // gStyle->SetOptFit(11);
   // gStyle->SetStatW(0.12);                
@@ -21,7 +21,7 @@ void draw_chain_graph_full()
   // Pre Scramble
 
   un_scramble_hist->Draw("");
-  un_scramble_hist->SetLineColor(1);
+  un_scramble_hist->SetLineColor(6);
   un_scramble_hist->SetLineStyle(1);
   un_scramble_hist->SetLineWidth(3);
   //un_scramble_hist->Fit("gaus");
@@ -68,20 +68,39 @@ void draw_chain_graph_full()
 
   // Velopix Scramble
   Velopix_scramble_hist->Draw("sames");
-  Velopix_scramble_hist->SetLineColor(8);
+  Velopix_scramble_hist->SetLineColor(7);
   Velopix_scramble_hist->SetLineStyle(6);
   Velopix_scramble_hist->SetLineWidth(3);
   //Velopix_scramble_hist->Fit("gaus"); 
   //Velopix_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
   Velopix_scramble_hist->SetStats(0);
 
-  
+  // Random Data
+  Random_data_hist->Draw("sames");
+  Random_data_hist->SetLineColor(1);
+  Random_data_hist->SetLineStyle(5);
+  Random_data_hist->SetLineWidth(3);
+  //Random_data_hist->Fit("gaus"); 
+  //Random_data_hist->GetFunction("gaus")->SetLineColor(4); 
+  Random_data_hist->SetStats(0);
+
+
+
+
+
+
+
+
+
+
+
   // Legend
   leg_top = new TLegend(0.65,0.6,0.9,0.9);
   leg_top->AddEntry(un_scramble_hist,"Pre Scrambler","l");
   leg_top->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
   leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
   leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
+  leg_top->AddEntry(Random_data_hist,"Random Data","l");
   leg_top->Draw();
 
 
@@ -105,7 +124,7 @@ myText->Draw();
 
   // Pre Scramble
   un_scramble_hist->Draw("");
-  un_scramble_hist->SetLineColor(1);
+  un_scramble_hist->SetLineColor(6);
   un_scramble_hist->SetLineStyle(1);
   //un_scramble_hist->Fit("gaus");
   //un_scramble_hist->GetFunction("gaus")->SetLineColor(1);
@@ -138,10 +157,20 @@ myText->Draw();
   // Velopix Scramble
   Velopix_scramble_hist->Draw("sames");
   Velopix_scramble_hist->SetLineColor(7);
-  Velopix_scramble_hist->SetLineStyle(5);
+  Velopix_scramble_hist->SetLineStyle(6);
   // Velopix_scramble_hist->Fit("gaus"); 
   // Velopix_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
   Velopix_scramble_hist->SetStats(0);
+
+
+   // Random Data
+  Random_data_hist->Draw("sames");
+  Random_data_hist->SetLineColor(1);
+  Random_data_hist->SetLineStyle(5);
+  Random_data_hist->SetLineWidth(3);
+  //Random_data_hist->Fit("gaus"); 
+  //Random_data_hist->GetFunction("gaus")->SetLineColor(4); 
+  Random_data_hist->SetStats(0);
   
   // Legend
   leg_top = new TLegend(0.65,0.6,0.9,0.9);
@@ -149,6 +178,7 @@ myText->Draw();
   leg_top->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
   leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
   leg_top->AddEntry(Velopix_scramble_hist,"Velopix Scrambler","l");
+  leg_top->AddEntry(Random_data_hist,"Random Data","l");
   leg_top->Draw();
   
   c1->Pad()->SetLogy();

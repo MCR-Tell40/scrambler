@@ -51,8 +51,14 @@ void draw_graphs()
 	  count ++;
 	  if (count%10000 == 0) cout << histogram[i]->GetName() << count << endl;
 	}
-    }
+    
 }
+
+}
+
+
+
+
 
 frame str_to_frame(string signal)
 {
@@ -70,7 +76,7 @@ int chain_count(frame DATA, TH1F* histogram) //IN PROGRESS
   int chain_length(1);
   for (int i(1); i < 120 ; i++)
     {
-      if (DATA[i] == DATA[i-1] && DATA[i] == 1)
+      if (DATA[i] == DATA[i-1] )//&& DATA[i] == 0)
 	//if (DATA[i] == 0)  //chains of 0's
 	//if (DATA[i] == 1)  //chains of 1's
 	{
