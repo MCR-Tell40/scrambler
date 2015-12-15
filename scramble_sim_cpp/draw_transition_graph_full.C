@@ -9,6 +9,7 @@ void draw_transition_graph_full()
   TH1F *random_data_hist        = (TH1F*)f->Get("Random_data_hist"        );
    
   TCanvas *c1 = new TCanvas("c1","Transitions Per Packet",900,600);
+  c1->SetTicks(1);
 
   // Karol Scramble
   Karol_scramble_hist->Draw("");
@@ -16,8 +17,9 @@ void draw_transition_graph_full()
   Karol_scramble_hist->SetLineStyle(1);
   Karol_scramble_hist->Fit("gaus"); 
   Karol_scramble_hist->GetFunction("gaus")->SetLineColor(2);
-  Karol_scramble_hist->SetTitle("Comparison of the Number of Transitions");
-  Karol_scramble_hist->GetXaxis()->SetTitle("Number of Transitions");
+  //Karol_scramble_hist->SetTitle("Comparison of the Number of Transitions");
+  Karol_scramble_hist->SetTitle("");
+  Karol_scramble_hist->GetXaxis()->SetTitle("Transitions Per Frame");
   Karol_scramble_hist->GetYaxis()->SetTitle("Entries");
   Karol_scramble_hist->GetYaxis()->SetRangeUser(0,25000);
   Karol_scramble_hist->GetYaxis()->SetLabelSize(0.02);
@@ -61,72 +63,73 @@ void draw_transition_graph_full()
   //desync9X stats
   stringstream desync9X_scramble_mean_ss;
   desync9X_scramble_mean_ss.precision(3);
-  desync9X_scramble_mean_ss << "mean: " << desync9X_scramble_hist->GetFunction("gaus")->GetParameter(1);
+  desync9X_scramble_mean_ss << "mean = " << desync9X_scramble_hist->GetFunction("gaus")->GetParameter(1);
   string desync9X_scramble_mean = desync9X_scramble_mean_ss.str();
 
   stringstream desync9X_scramble_sigma_ss;
   desync9X_scramble_sigma_ss.precision(3);
-  desync9X_scramble_sigma_ss << "#sigma: " << desync9X_scramble_hist->GetFunction("gaus")->GetParameter(2);
+  desync9X_scramble_sigma_ss << "#sigma = " << desync9X_scramble_hist->GetFunction("gaus")->GetParameter(2);
   string desync9X_scramble_sigma = desync9X_scramble_sigma_ss.str();
 
   //Karol stats
   stringstream Karol_scramble_mean_ss;
   Karol_scramble_mean_ss.precision(3);
-  Karol_scramble_mean_ss << "mean: " << Karol_scramble_hist->GetFunction("gaus")->GetParameter(1);
+  Karol_scramble_mean_ss << "mean = " << Karol_scramble_hist->GetFunction("gaus")->GetParameter(1);
   string Karol_scramble_mean = Karol_scramble_mean_ss.str();
 
   stringstream Karol_scramble_sigma_ss;
   Karol_scramble_sigma_ss.precision(3);
-  Karol_scramble_sigma_ss << "#sigma: " << Karol_scramble_hist->GetFunction("gaus")->GetParameter(2);
+  Karol_scramble_sigma_ss << "#sigma = " << Karol_scramble_hist->GetFunction("gaus")->GetParameter(2);
   string Karol_scramble_sigma = Karol_scramble_sigma_ss.str();
 
   //additive stats
   stringstream additive_scramble_mean_ss;
   additive_scramble_mean_ss.precision(3);
-  additive_scramble_mean_ss << "mean: " << additive_scramble_hist->GetFunction("gaus")->GetParameter(1);
+  additive_scramble_mean_ss << "mean = " << additive_scramble_hist->GetFunction("gaus")->GetParameter(1);
   string additive_scramble_mean = additive_scramble_mean_ss.str();
 
   stringstream additive_scramble_sigma_ss;
   additive_scramble_sigma_ss.precision(3);
-  additive_scramble_sigma_ss << "#sigma: " << additive_scramble_hist->GetFunction("gaus")->GetParameter(2);
+  additive_scramble_sigma_ss << "#sigma = " << additive_scramble_hist->GetFunction("gaus")->GetParameter(2);
   string additive_scramble_sigma = additive_scramble_sigma_ss.str();
 
   //velopix stats
   stringstream velopix_scramble_mean_ss;
   velopix_scramble_mean_ss.precision(3);
-  velopix_scramble_mean_ss << "mean: " << velopix_scramble_hist->GetFunction("gaus")->GetParameter(1);
+  velopix_scramble_mean_ss << "mean = " << velopix_scramble_hist->GetFunction("gaus")->GetParameter(1);
   string velopix_scramble_mean = velopix_scramble_mean_ss.str();
 
   stringstream velopix_scramble_sigma_ss;
   velopix_scramble_sigma_ss.precision(3);
-  velopix_scramble_sigma_ss << "#sigma: " << velopix_scramble_hist->GetFunction("gaus")->GetParameter(2);
+  velopix_scramble_sigma_ss << "#sigma = " << velopix_scramble_hist->GetFunction("gaus")->GetParameter(2);
   string velopix_scramble_sigma = velopix_scramble_sigma_ss.str();
 
   //random stats
   stringstream random_data_mean_ss;
   random_data_mean_ss.precision(3);
-  random_data_mean_ss << "mean: " << random_data_hist->GetFunction("gaus")->GetParameter(1);
+  random_data_mean_ss << "mean = " << random_data_hist->GetFunction("gaus")->GetParameter(1);
   string random_data_mean = random_data_mean_ss.str();
 
   stringstream random_data_sigma_ss;
   random_data_sigma_ss.precision(3);
-  random_data_sigma_ss << "#sigma: " << random_data_hist->GetFunction("gaus")->GetParameter(2);
+  random_data_sigma_ss << "#sigma = " << random_data_hist->GetFunction("gaus")->GetParameter(2);
   string random_data_sigma = random_data_sigma_ss.str();
   
-  leg = new TLegend(0.65,0.6,0.9,0.9);
-  leg->AddEntry(desync9X_scramble_hist,"Desync9X Scrambler","l");
+  leg = new TLegend(0.65,0.4,0.87,0.87);
+  leg->SetLineColor(0);
+  leg->AddEntry(desync9X_scramble_hist,"Unscrambled Data","f");
   leg->AddEntry(desync9X_scramble_hist,desync9X_scramble_mean.c_str(),"");
   leg->AddEntry(desync9X_scramble_hist,desync9X_scramble_sigma.c_str(),"");
-  leg->AddEntry(random_data_hist,"random Data","l");
+  leg->AddEntry(random_data_hist,"Random Data","f");
   leg->AddEntry(random_data_hist,random_data_mean.c_str(),"");
   leg->AddEntry(random_data_hist,random_data_sigma.c_str(),"");
-  leg->AddEntry(velopix_scramble_hist,"Velopix Scrambler","l");
+  leg->AddEntry(velopix_scramble_hist,"Velopix Scrambler","f");
   leg->AddEntry(velopix_scramble_hist,velopix_scramble_mean.c_str(),"");
   leg->AddEntry(velopix_scramble_hist,velopix_scramble_sigma.c_str(),"");
-  leg->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","l");
+  leg->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","f");
   leg->AddEntry(Karol_scramble_hist,Karol_scramble_mean.c_str(),"");
   leg->AddEntry(Karol_scramble_hist,Karol_scramble_sigma.c_str(),"");
-  leg->AddEntry(additive_scramble_hist,"Additive Scrambler","l");
+  leg->AddEntry(additive_scramble_hist,"Additive Scrambler","f");
   leg->AddEntry(additive_scramble_hist,additive_scramble_mean.c_str(),"");
   leg->AddEntry(additive_scramble_hist,additive_scramble_sigma.c_str(),"");
   leg->Draw();
