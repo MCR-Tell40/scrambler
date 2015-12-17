@@ -15,8 +15,8 @@ def __main__ ():
 
 		out_file.write(frame + '\n')
 
-		if (x % 100000 == 0):
-			print x
+		if (x % 1000000 == 0):
+			print x / 1000000, ' mill'
 
 	out_file.close()
 

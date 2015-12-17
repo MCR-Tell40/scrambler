@@ -8,13 +8,14 @@ void draw_transition_graph_full()
   TH1F *velopix_scramble_hist   = (TH1F*)f->Get("Velopix_scrambler_hist"  );
   TH1F *random_data_hist        = (TH1F*)f->Get("Random_data_hist"        );
    
-  TCanvas *c1 = new TCanvas("c1","Transitions Per Packet",900,600);
+  TCanvas *c1 = new TCanvas("c_trans","Transitions Per Packet",900,600);
   c1->SetTicks(1);
 
   // Karol Scramble
   Karol_scramble_hist->Draw("");
   Karol_scramble_hist->SetLineColor(2);
   Karol_scramble_hist->SetLineStyle(1);
+  Karol_scramble_hist->SetLineWidth(2);
   Karol_scramble_hist->Fit("gaus"); 
   Karol_scramble_hist->GetFunction("gaus")->SetLineColor(2);
   //Karol_scramble_hist->SetTitle("Comparison of the Number of Transitions");
@@ -32,6 +33,7 @@ void draw_transition_graph_full()
   desync9X_scramble_hist->Fit("gaus");
   desync9X_scramble_hist->GetFunction("gaus")->SetLineColor(6); 
   desync9X_scramble_hist->SetStats(0);
+  desync9X_scramble_hist->SetLineWidth(2);
    
   // Additive Scramble
   additive_scramble_hist->Draw("sames");
@@ -40,15 +42,17 @@ void draw_transition_graph_full()
   additive_scramble_hist->Fit("gaus"); 
   additive_scramble_hist->GetFunction("gaus")->SetLineColor(4); 
   additive_scramble_hist->SetStats(0);
+  additive_scramble_hist->SetLineWidth(2);
 
   // Velopix Scramble
   velopix_scramble_hist->Draw("sames");
-  velopix_scramble_hist->SetLineColor(7);
+  velopix_scramble_hist->SetLineColor(kOrange-3);
   velopix_scramble_hist->SetLineStyle(1);
   velopix_scramble_hist->Fit("gaus"); 
   velopix_scramble_hist->GetFunction("gaus")->SetLineColor(7);
   velopix_scramble_hist->GetFunction("gaus")->SetLineStyle(2); 
   velopix_scramble_hist->SetStats(0);
+  velopix_scramble_hist->SetLineWidth(2);
 
   //Random Data  
   random_data_hist->Draw("sames");
@@ -58,6 +62,7 @@ void draw_transition_graph_full()
   random_data_hist->GetFunction("gaus")->SetLineColor(1);
   random_data_hist->GetFunction("gaus")->SetLineStyle(3); 
   random_data_hist->SetStats(0);
+  random_data_hist->SetLineWidth(2);
   
   // ----- Legend ----- //
   //desync9X stats

@@ -70,7 +70,7 @@ void draw_chain_graph_full()
   
   // Velopix Scramble
   Velopix_scramble_hist->Draw("sames");
-  Velopix_scramble_hist->SetLineColor(7);
+  Velopix_scramble_hist->SetLineColor(28);
   Velopix_scramble_hist->SetLineStyle(1);
   Velopix_scramble_hist->Fit("expo"); 
   Velopix_scramble_hist->GetFunction("expo")->SetLineColor(7); 

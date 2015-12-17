@@ -5,22 +5,24 @@ FLAGS = -std=c++11
 all: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
 
 scramble_sim: scramble_sim.cpp scramble_sim.h
-	g++ -o $@ scramble_sim.cpp
+	make available;	g++ -o $@ scramble_sim.cpp
 
 root_transition_analysis: root_transition_analysis.cpp root_transition_analysis.h
-	g++ -o $@ root_transition_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
+	make available;	g++ -o $@ root_transition_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
 root_longest_chain: root_longest_chain.cpp root_longest_chain.h
-	g++ -o $@ root_longest_chain.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
+	make available;	g++ -o $@ root_longest_chain.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
 root_balance_analysis: root_balance_analysis.cpp root_balance_analysis.h
-	g++ -o $@ root_balance_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
+	make available;	g++ -o $@ root_balance_analysis.cpp $(ROOTFLAGS) $(ROOTLIBS) $(FLAGS)
 
-run_short: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
+run_short: all
+	make available
 	./scramble_sim             desyncFilter.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt
 	./root_transition_analysis desyncFilter.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt transition_analysis_short.root
 	./root_longest_chain       desyncFilter.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt longest_chain_short.root
 	./root_balance_analysis    desyncFilter.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt balance_analysis_short.root
+	make organise
 
 run_9X: scramble_sim root_transition_analysis root_longest_chain root_balance_analysis
 	./scramble_sim             desync9X.txt Karol_scramble_output.txt additive_scramble_output.txt VeloPix_scramble_output.txt
@@ -38,3 +40,10 @@ clean:
 	rm -f scramble_sim
 	rm -f root_transition_analysis
 	rm -f root_longest_chain
+
+organise:
+	mv -f *.C root_macros/; mv -f *.txt data/; mv -f *.png *.pdf graphs/; mv -f *.root root_files/
+
+
+available:
+	mv -f root_macros/* data/* root_files/* .
