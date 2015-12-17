@@ -40,6 +40,7 @@ clean:
 	rm -f scramble_sim
 	rm -f root_transition_analysis
 	rm -f root_longest_chain
+	rm -f root_balance_analysis
 
 organise:
 	mv -f *.C root_macros/; mv -f *.txt data/; mv -f *.png *.pdf graphs/; mv -f *.root root_files/

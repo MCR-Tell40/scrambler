@@ -33,6 +33,7 @@ void draw_chain_graph_full()
   un_scramble_hist->Draw("");
   un_scramble_hist->SetLineColor(6);
   un_scramble_hist->SetLineStyle(1);
+  un_scramble_hist->SetLineWidth(2);
   un_scramble_hist->Fit("expo");
   un_scramble_hist->GetFunction("expo")->SetLineColor(6);
   un_scramble_hist->SetTitle(0);
@@ -48,12 +49,10 @@ void draw_chain_graph_full()
   Karol_scramble_hist->Draw("sames");
   Karol_scramble_hist->SetLineColor(2);
   Karol_scramble_hist->SetLineStyle(1);
-  // TF1* Karol_fit = new TF1("Karol_fit",linFit,1,30,2);
-  // Karol_fit->SetParameters(1e7,-0.5);
+  Karol_scramble_hist->SetLineWidth(2);
   Karol_scramble_hist->Fit("expo"); 
   Karol_scramble_hist->GetFunction("expo")->SetLineColor(2);
   Karol_scramble_hist->GetFunction("expo")->SetLineColor(1);
-  //Karol_scramble_hist->GetYaxis()->SetLabelSize(0.02);
   Karol_scramble_hist->SetStats(0);
 
   
@@ -62,6 +61,7 @@ void draw_chain_graph_full()
   additive_scramble_hist->Draw("sames");
   additive_scramble_hist->SetLineColor(4);
   additive_scramble_hist->SetLineStyle(1);
+  additive_scramble_hist->SetLineWidth(2);
   additive_scramble_hist->Fit("expo"); 
   additive_scramble_hist->GetFunction("expo")->SetLineColor(4); 
   additive_scramble_hist->GetFunction("expo")->SetLineStyle(7);
@@ -70,56 +70,74 @@ void draw_chain_graph_full()
   
   // Velopix Scramble
   Velopix_scramble_hist->Draw("sames");
-  Velopix_scramble_hist->SetLineColor(28);
+  Velopix_scramble_hist->SetLineColor(7);
   Velopix_scramble_hist->SetLineStyle(1);
+  Velopix_scramble_hist->SetLineWidth(2);
   Velopix_scramble_hist->Fit("expo"); 
   Velopix_scramble_hist->GetFunction("expo")->SetLineColor(7); 
   Velopix_scramble_hist->GetFunction("expo")->SetLineStyle(6);
   Velopix_scramble_hist->SetStats(0);
 
-// Random Data
+  // Random Data
   Random_data_hist->Draw("sames");
   Random_data_hist->SetLineColor(1);
   Random_data_hist->SetLineStyle(1);
+  Random_data_hist->SetLineWidth(2);
   Random_data_hist->Fit("expo"); 
   Random_data_hist->GetFunction("expo")->SetLineColor(1); 
   Random_data_hist->GetFunction("expo")->SetLineStyle(5);
   Random_data_hist->SetStats(0);
   
+
+  // Legend
+  stringstream fig_text; fig_text << setprecision(3);
+  leg_top = new TLegend(0.6,0.4,0.725,0.87);
+  leg_top->SetFillStyle(0);
+  leg_top->SetLineColor(-1);
+  leg_top->SetTextSize(0.03);
+
+  leg_top->AddEntry(un_scramble_hist,"Unscrambled Data","f");
   double a = un_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
   double p = 1 - pow(10,a);
   double e = (p / a) * un_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
-  cout << "****Unscrambled: Grad = " << a << "\t p_t = " << p << "\t +/- " << e << endl;
+  cout << "Unscrambled," << a << ", " << p << "," << e << endl;
+  fig_text.str(""); fig_text << "Gradient = " << a << ", p_{t} = " << p;
+  leg_top->AddEntry(un_scramble_hist,fig_text.str().c_str(),"");
 
-  a = additive_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
-  p = 1 - pow(10,a);
-  e = (p / a) * additive_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
-  cout << "****Additive: Grad = " << a << "\t p_t = " << p << "\t +/- " << e << endl;
-
-  a = Karol_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
-  p = 1 - pow(10,a);
-  e = (p / a) * Karol_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
-  cout << "****Intermediate: Grad = " << a << "\t p_t = " << p << "\t +/- " << e << endl;
-
-  a = Velopix_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
-  p = 1 - pow(10,a);
-  e = (p / a) * Velopix_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
-  cout << "****Velopix: Grad = " << a << "\t p_t = " << p << "\t +/- " << e << endl;
-
+  leg_top->AddEntry(Random_data_hist,"Random Data","f");
   a = Random_data_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
   p = 1 - pow(10,a);
   e = (p / a) * Random_data_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
-  cout << "****Random: Grad = " << a << "\t p_t = " << p << "\t +/- " << e << endl;
-  
-  // Legend
-  leg_top = new TLegend(0.6,0.6,0.87,0.87);
-  leg_top->SetLineColor(0);
-  leg_top->SetTextSize(0.0275);
-  leg_top->AddEntry(un_scramble_hist,"Unscrambled Data","f");
-  leg_top->AddEntry(Random_data_hist,"Random Data","f");
+  cout << "Random," << a << ", " << p << "," << e << endl;
+  fig_text.str(""); fig_text << "Gradient = " << a << ", p_{t} = " << p;
+  leg_top->AddEntry(Random_data_hist,fig_text.str().c_str(),"");
+
   leg_top->AddEntry(additive_scramble_hist,"Additive Scrambler","f");
+  a = additive_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
+  p = 1 - pow(10,a);
+  e = (p / a) * additive_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
+  cout << "Additive," << a << ", " << p << "," << e << endl;
+  fig_text.str(""); fig_text << "Gradient = " << a << ", p_{t} = " << p;
+  leg_top->AddEntry(additive_scramble_hist,fig_text.str().c_str(),"");
+
+
   leg_top->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","f");
+  a = Karol_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
+  p = 1 - pow(10,a);
+  e = (p / a) * Karol_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
+  cout << "Intermediate," << a << ", " << p << "," << e << endl;
+  fig_text.str(""); fig_text << "Gradient = " << a << ", p_{t} = " << p;
+  leg_top->AddEntry(Karol_scramble_hist,fig_text.str().c_str(),"");
+
   leg_top->AddEntry(Velopix_scramble_hist,"VeloPix Scrambler","f");
+  a = Velopix_scramble_hist->GetFunction("expo")->GetParameter(1)*TMath::LogE();
+  p = 1 - pow(10,a);
+  e = (p / a) * Velopix_scramble_hist->GetFunction("expo")->GetParError(1) * TMath::LogE();
+  cout << "Velopix," << a << ", " << p << "," << e << endl;
+  fig_text.str(""); fig_text << "Gradient = " << a << ", p_{t} = " << p;
+  leg_top->AddEntry(Velopix_scramble_hist,fig_text.str().c_str(),"");
+
+  
   leg_top->Draw();
   
   c1->SetLogy();

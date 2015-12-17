@@ -46,7 +46,7 @@ void draw_transition_graph_full()
 
   // Velopix Scramble
   velopix_scramble_hist->Draw("sames");
-  velopix_scramble_hist->SetLineColor(kOrange-3);
+  velopix_scramble_hist->SetLineColor(7);
   velopix_scramble_hist->SetLineStyle(1);
   velopix_scramble_hist->Fit("gaus"); 
   velopix_scramble_hist->GetFunction("gaus")->SetLineColor(7);
@@ -128,15 +128,15 @@ void draw_transition_graph_full()
   leg->AddEntry(random_data_hist,"Random Data","f");
   leg->AddEntry(random_data_hist,random_data_mean.c_str(),"");
   leg->AddEntry(random_data_hist,random_data_sigma.c_str(),"");
-  leg->AddEntry(velopix_scramble_hist,"Velopix Scrambler","f");
-  leg->AddEntry(velopix_scramble_hist,velopix_scramble_mean.c_str(),"");
-  leg->AddEntry(velopix_scramble_hist,velopix_scramble_sigma.c_str(),"");
-  leg->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","f");
-  leg->AddEntry(Karol_scramble_hist,Karol_scramble_mean.c_str(),"");
-  leg->AddEntry(Karol_scramble_hist,Karol_scramble_sigma.c_str(),"");
   leg->AddEntry(additive_scramble_hist,"Additive Scrambler","f");
   leg->AddEntry(additive_scramble_hist,additive_scramble_mean.c_str(),"");
   leg->AddEntry(additive_scramble_hist,additive_scramble_sigma.c_str(),"");
+  leg->AddEntry(Karol_scramble_hist,"Intermediate Scrambler","f");
+  leg->AddEntry(Karol_scramble_hist,Karol_scramble_mean.c_str(),"");
+  leg->AddEntry(Karol_scramble_hist,Karol_scramble_sigma.c_str(),"");
+  leg->AddEntry(velopix_scramble_hist,"Velopix Scrambler","f");
+  leg->AddEntry(velopix_scramble_hist,velopix_scramble_mean.c_str(),"");
+  leg->AddEntry(velopix_scramble_hist,velopix_scramble_sigma.c_str(),"");
   leg->Draw();
 
   c1->Update();
